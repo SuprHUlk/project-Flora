@@ -9,9 +9,10 @@ interface userlist1{
 }
 
 @Component({
-  selector: 'app-letter',
-  templateUrl: './letter.component.html',
-  styleUrls: ['./letter.component.css']
+    selector: 'app-letter',
+    templateUrl: './letter.component.html',
+    styleUrls: ['./letter.component.css'],
+    standalone: false
 })
 
 

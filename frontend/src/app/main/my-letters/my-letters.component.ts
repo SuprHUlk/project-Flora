@@ -12,9 +12,10 @@ interface message{
 
 
 @Component({
-  selector: 'app-my-letters',
-  templateUrl: './my-letters.component.html',
-  styleUrls: ['./my-letters.component.css']
+    selector: 'app-my-letters',
+    templateUrl: './my-letters.component.html',
+    styleUrls: ['./my-letters.component.css'],
+    standalone: false
 })
 
 

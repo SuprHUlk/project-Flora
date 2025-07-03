@@ -4,16 +4,16 @@ Object.defineProperty(exports, '__esModule', { value: true });
 
 var schematics = require('@angular-devkit/schematics');
 var path = require('path');
-var messages = require('../messages-5930d301.js');
+var messages = require('../messages-Coq8X1sU.js');
 var core = require('@angular-devkit/core');
 var utility = require('@schematics/angular/utility');
 var ngAstUtils = require('@schematics/angular/utility/ng-ast-utils');
 var astUtils = require('@schematics/angular/utility/ast-utils');
 var change = require('@schematics/angular/utility/change');
 var ts = require('@schematics/angular/third_party/github.com/Microsoft/TypeScript/lib/typescript');
+var util = require('@schematics/angular/utility/standalone/util');
 
-function _interopNamespace(e) {
-    if (e && e.__esModule) return e;
+function _interopNamespaceDefault(e) {
     var n = Object.create(null);
     if (e) {
         Object.keys(e).forEach(function (k) {
@@ -26,12 +26,12 @@ function _interopNamespace(e) {
             }
         });
     }
-    n["default"] = e;
+    n.default = e;
     return Object.freeze(n);
 }
 
-var path__namespace = /*#__PURE__*/_interopNamespace(path);
-var ts__namespace = /*#__PURE__*/_interopNamespace(ts);
+var path__namespace = /*#__PURE__*/_interopNamespaceDefault(path);
+var ts__namespace = /*#__PURE__*/_interopNamespaceDefault(ts);
 
 // Regular expression that matches all possible Angular CLI default style files
 const defaultStyleFileRegex = /styles\.(c|le|sc|sa)ss/;
@@ -57,14 +57,14 @@ function getProjectStyleFile(project, extension) {
         const styles = buildOptions.styles.map((s) => (typeof s === 'string' ? s : s['input']));
         // Look for the default style file that is generated for new projects by the Angular CLI. This
         // default style file is usually called `styles.ext` unless it has been changed explicitly.
-        const defaultMainStylePath = styles.find((file) => extension ? file === `styles.${extension}` : defaultStyleFileRegex.test(file));
+        const defaultMainStylePath = styles.find((file) => defaultStyleFileRegex.test(file));
         if (defaultMainStylePath) {
             return core.normalize(defaultMainStylePath);
         }
         // If no default style file could be found, use the first style file that matches the given
         // extension. If no extension specified explicitly, we look for any file with a valid style
         // file extension.
-        const fallbackStylePath = styles.find((file) => extension ? file.endsWith(`.${extension}`) : validStyleFileRegex.test(file));
+        const fallbackStylePath = styles.find((file) => validStyleFileRegex.test(file));
         if (fallbackStylePath) {
             return core.normalize(fallbackStylePath);
         }
@@ -178,27 +178,29 @@ function addNgbModuleToAppModule(options) {
             throw new schematics.SchematicsException(messages.noProject(projectName));
         }
         // 2. getting main file for project
-        const projectBuildOptions = getProjectTargetOptions(project, 'build');
-        const mainFilePath = projectBuildOptions.main;
+        const mainFilePath = await util.getMainFilePath(host, projectName);
         if (!mainFilePath || !host.read(mainFilePath)) {
             throw new schematics.SchematicsException(messages.noMainFile(projectName));
         }
-        // 3. getting main app module file
-        const appModuleFilePath = ngAstUtils.getAppModulePath(host, mainFilePath);
-        const appModuleFileText = host.read(appModuleFilePath);
-        if (appModuleFileText === null) {
-            throw new schematics.SchematicsException(messages.noModuleFile(appModuleFilePath));
-        }
-        // 4. adding `NgbModule` to the app module
-        const appModuleSource = ts__namespace.createSourceFile(appModuleFilePath, appModuleFileText.toString('utf-8'), ts__namespace.ScriptTarget.Latest, true);
-        const changes = astUtils.addImportToModule(appModuleSource, appModuleFilePath, NG_BOOTSTRAP_MODULE_NAME, NG_BOOTSTRAP_PACKAGE_NAME);
-        const recorder = host.beginUpdate(appModuleFilePath);
-        for (const change$1 of changes) {
-            if (change$1 instanceof change.InsertChange) {
-                recorder.insertLeft(change$1.pos, change$1.toAdd);
+        // we're not patching standalone apps
+        if (!ngAstUtils.isStandaloneApp(host, mainFilePath)) {
+            // 3. getting main app module file
+            const appModuleFilePath = ngAstUtils.getAppModulePath(host, mainFilePath);
+            const appModuleFileText = host.read(appModuleFilePath);
+            if (appModuleFileText === null) {
+                throw new schematics.SchematicsException(messages.noModuleFile(appModuleFilePath));
             }
+            // 4. adding `NgbModule` to the app module
+            const appModuleSource = ts__namespace.createSourceFile(appModuleFilePath, appModuleFileText.toString('utf-8'), ts__namespace.ScriptTarget.Latest, true);
+            const changes = astUtils.addImportToModule(appModuleSource, appModuleFilePath, NG_BOOTSTRAP_MODULE_NAME, NG_BOOTSTRAP_PACKAGE_NAME);
+            const recorder = host.beginUpdate(appModuleFilePath);
+            for (const change$1 of changes) {
+                if (change$1 instanceof change.InsertChange) {
+                    recorder.insertLeft(change$1.pos, change$1.toAdd);
+                }
+            }
+            host.commitUpdate(recorder);
         }
-        host.commitUpdate(recorder);
     };
 }
 
@@ -210,8 +212,8 @@ function ngAddSetupProject(options) {
     return schematics.chain([
         addNgbModuleToAppModule(options),
         addBootstrapStyles(options),
-        schematics.externalSchematic('@angular/localize', 'ng-add', options.project ? { name: options.project } : {}),
+        schematics.externalSchematic('@angular/localize', 'ng-add', options.project ? { project: options.project } : {}),
     ]);
 }
 
-exports["default"] = ngAddSetupProject;
+exports.default = ngAddSetupProject;

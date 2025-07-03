@@ -1,93 +1,79 @@
 import { Component } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Signup } from '../signup-page/signup.model';
 import { Router } from '@angular/router';
-import { NgForm } from '@angular/forms';
 import { LoginService } from 'src/services/login.service';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { AngularFirestoreCollection } from '@angular/fire/compat/firestore';
-import { Observable } from 'rxjs';
-import { AngularFireStorage} from '@angular/fire//compat/storage';
+import {
+  ReactiveFormsModule,
+  FormGroup,
+  FormControl,
+  Validators,
+} from '@angular/forms';
 
-interface post{
-  EMAIL_ADD:string;
-  FIRST_NAME:string;
-  LAST_NAME:string;
-  PASSWORD:string;
-  USERNAME:string;
-}
-
-
+import { Signup } from '../../models/signup.model';
 
 @Component({
   selector: 'app-signup-page',
   templateUrl: './signup-page.component.html',
-  styleUrls: ['./signup-page.component.css']
+  styleUrls: ['./signup-page.component.css'],
+  imports: [ReactiveFormsModule],
 })
-
-
-
-
 export class SignupPageComponent {
+  errorMessage: string = '';
 
-  model: post;
-  u_id:string;
-  isLoginMode = true;
-  errorMessage: string;
-  f_name: string;
-  l_name: string;
-  u_name: string;
-  email: string;
-  password: string;
-  rePassword: string;
-  object: any;
+  signupForm = new FormGroup({
+    fname: new FormControl('', [Validators.required]),
+    lname: new FormControl('', [Validators.required]),
+    username: new FormControl('', [Validators.required]),
+    email: new FormControl('', [Validators.required, Validators.email]),
+    password: new FormControl('', [Validators.required]),
+    rePassword: new FormControl('', [Validators.required]),
+  });
 
+  constructor(private loginService: LoginService, private router: Router) {}
 
+  onSubmit() {
+    const password = this.signupForm.get('password')!.value;
+    const rePassword = this.signupForm.get('rePassword')!.value;
+    console.log();
 
+    if (password != rePassword) {
+      this.errorMessage = 'Password does not match';
+      return;
+    }
 
-  productsRef: AngularFirestoreCollection<post>;
-  posts: Observable<post[]>;
-  constructor(private loginService: LoginService,private router: Router,private http: HttpClient,private afs: AngularFirestore,private af: AngularFireStorage){
-    this.productsRef = this.afs.collection<post>('users');
+    if (!this.signupForm.valid) {
+      alert('Please fill the form');
+    }
 
- 
+    this.signup();
   }
 
+  signup() {
+    const data = this.signupForm.value;
 
+    const signUp: Signup = {
+      fname: data.fname!,
+      lname: data.lname!,
+      email: data.email!,
+      password: data.password!,
+      username: data.username!,
+    };
 
+    this.loginService.signup(signUp).subscribe({
+      next: (res) => {
+        console.log(res);
+      },
+      error: (err) => {
+        console.log(err.error.errors);
 
-
-  onSubmit(form: NgForm){
-    const email=form.value.email;
-    const password =  form.value.password;
-
-    if(this.password!=this.rePassword) {
-      this.errorMessage = "Password does not match";
-    }
-    else {
-      this.loginService.signup(email, password).
-      subscribe(
-        respondData => {
-          //making user ready for authentication
-          this.http.post('https://flora-fbf5b-default-rtdb.firebaseio.com/users.json',{email: this.email}).subscribe(respondData => {console.log(respondData)});
-          //Creating model to add it later in the firestore
-          this.model={
-            EMAIL_ADD:this.email,
-            FIRST_NAME:this.f_name,
-            LAST_NAME:this.l_name,
-            PASSWORD:this.password, 
-            USERNAME:this.u_name
-          }
-
-
-          this.productsRef.doc(this.email).set(this.model).then( _ => alert("Signed up Successfully!!"));     //adding data to firestore
-          // this.http.post('https://flora-fbf5b-default-rtdb.firebaseio.com/profiles.json',{firstName:this.f_name,lastName:this.l_name,userName:this.u_name,email: this.email,password:this.password}).subscribe(respondData => {console.log(respondData)});
-          this.router.navigate(['/']);  //navigating to login page
-        },
-        errorMessage => {
-          this.errorMessage = errorMessage;
+        if (err.error.errors.email) {
+          this.errorMessage = 'EMAIL_EXISTS';
+        } else if (err.error.errors.username) {
+          this.errorMessage = 'USERNAME_EXISTS';
         }
-      );
-    }
+      },
+      complete: () => {
+        this.router.navigate(['/']);
+      },
+    });
   }
 }

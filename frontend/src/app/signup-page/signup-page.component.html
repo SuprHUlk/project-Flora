@@ -1,34 +1,97 @@
 <div class="container-fluid">
-    <form class="col-4" #authForm="ngForm">
-        <h1>Flora</h1>
-        <hr class="mb-2">
-        <div class="mb-2 mt-3">
-            <label for="f_name" class="form-label">First Name</label>
-            <input type="text"  class="form-control form-control-sm" id="f_name" placeholder="Salty" name="firstname" [(ngModel)]="f_name" required>
-        </div>
-        <div class="mb-2">
-            <label for="l_name" class="form-label">Last Name </label>
-            <input type="text" class="form-control  form-control-sm" id="l_name" placeholder="Hulk" name="lastname" [(ngModel)]="l_name" required>
-        </div>
-        <div class="mb-2">
-            <label for="u_name" class="form-label">Username</label>
-            <input type="text" class="form-control  form-control-sm" id="u_name" placeholder="A COOL NAME" name="username" [(ngModel)]="u_name" required>
-        </div> 
-        <div class="mb-2">
-            <label for="email" class="form-label">Email address <div class="error mb-0" *ngIf=" errorMessage == 'EMAIL_EXISTS' ">Email address already exists!</div></label> 
-            <input type="email" class="form-control  form-control-sm" id="email" placeholder="name@example.com" name="email" [(ngModel)]="email" email required>
-        </div>
-        <div class="mb-2">
-            <label for="password" class="form-label">Password <div class="error mb-0" *ngIf=" errorMessage == 'WEAK_PASSWORD : Password should be at least 6 characters' ">Password's length should be greater than 5</div></label>
-            <input type="password" class="form-control  form-control-sm" id="password" name="password" [(ngModel)]="password" required>
-        </div>
-        <div class="mb-2">
-            <label for="password_check" class="form-label">Re-enter password <div class="error mb-0" *ngIf=" errorMessage == 'Password does not match' ">Password doesn't match</div></label>
-            <input type="password" class="form-control  form-control-sm" id="password_check" name="rePassword" [(ngModel)]="rePassword" required>
-        </div>
-        <div class="mb-2">
-            <div class="error" *ngIf=" errorMessage == 'UNKNOWN_ERROR' ">An unexpected error occurred!!</div>
-            <button type="submit" class="css-button-sliding-to-left--green mt-2" (click)="onSubmit(authForm)" [disabled]=(!authForm.valid) >Floral !!! </button>
-        </div>
-    </form>
+  <form class="col-4" [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+    <h1>Flora</h1>
+    <hr class="mb-2" />
+    <div class="mb-2 mt-3">
+      <label for="fname" class="form-label">First Name</label>
+      <input
+        type="text"
+        class="form-control form-control-sm"
+        id="f_name"
+        placeholder="Salty"
+        formControlName="fname"
+        required
+      />
+    </div>
+    <div class="mb-2">
+      <label for="l_name" class="form-label">Last Name </label>
+      <input
+        type="text"
+        class="form-control form-control-sm"
+        id="l_name"
+        placeholder="Hulk"
+        formControlName="lname"
+        required
+      />
+    </div>
+    <div class="mb-2">
+      <label for="u_name" class="form-label"
+        >Username @if(errorMessage == 'USERNAME_EXISTS') {
+        <div class="error mb-0">Email address already exists!</div>
+        }</label
+      >
+      <input
+        type="text"
+        class="form-control form-control-sm"
+        id="u_name"
+        placeholder="A COOL NAME"
+        formControlName="username"
+        required
+      />
+    </div>
+    <div class="mb-2">
+      <label for="email" class="form-label"
+        >Email address @if(errorMessage == 'EMAIL_EXISTS') {
+        <div class="error mb-0">Email address already exists!</div>
+        }
+      </label>
+      <input
+        type="email"
+        class="form-control form-control-sm"
+        id="email"
+        placeholder="name@example.com"
+        formControlName="email"
+        email
+        required
+      />
+    </div>
+    <div class="mb-2">
+      <label for="password" class="form-label">
+        Password
+        <!-- @if(errorMessage == "WEAK_PASSWORD : Password should be at
+        least 6 characters") {
+        <div class="error mb-0">Password's length should be greater than 5</div>
+        } -->
+      </label>
+      <input
+        type="password"
+        class="form-control form-control-sm"
+        id="password"
+        formControlName="password"
+        required
+      />
+    </div>
+    <div class="mb-2">
+      <label for="password_check" class="form-label"
+        >Re-enter password @if(errorMessage == 'Password does not match') {
+        <div class="error mb-0">Password doesn't match</div>
+        }
+      </label>
+      <input
+        type="password"
+        class="form-control form-control-sm"
+        id="password_check"
+        formControlName="rePassword"
+        required
+      />
+    </div>
+    <div class="mb-2">
+      @if(errorMessage == 'UNKNOWN_ERROR') {
+      <div class="error">An unexpected error occurred!!</div>
+      }
+      <button type="submit" class="css-button-sliding-to-left--green mt-2">
+        Floral !!!
+      </button>
+    </div>
+  </form>
 </div>

@@ -1,49 +1,64 @@
-import { Component, inject, Input } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Login } from './login.model';
+import { Component } from '@angular/core';
+import { Login } from '../../models/login.model';
 import { Router } from '@angular/router';
-import { NgForm } from '@angular/forms';
+import { NgForm, Validators } from '@angular/forms';
 import { LoginService } from 'src/services/login.service';
+import { ReactiveFormsModule, FormGroup, FormControl } from '@angular/forms';
+import { NgbCarouselModule } from '@ng-bootstrap/ng-bootstrap';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-login-page',
   templateUrl: './login-page.component.html',
-  styleUrls: ['./login-page.component.css']
+  styleUrls: ['./login-page.component.css'],
+  imports: [ReactiveFormsModule, NgbCarouselModule, RouterModule],
 })
 export class LoginPageComponent {
-
-  images = ['assets/ok.jpg','assets/ok1.png','assets/r2.jpg']
-  email='';
-  password='';
-  dict: any;
+  images = ['assets/ok.jpg', 'assets/ok1.png', 'assets/r2.jpg'];
   errorMessage: any;
 
-  constructor(private router:Router, private loginService: LoginService){}
+  loginForm = new FormGroup({
+    email: new FormControl('', [Validators.required, Validators.email]),
+    password: new FormControl('', [Validators.required]),
+  });
 
-  login: Login=new Login(this.email,this.password);
+  constructor(private router: Router, private loginService: LoginService) {}
 
+  onSubmit() {
+    if (!this.loginForm.valid) {
+      alert('Please fill the form properly');
+      return;
+    }
 
+    this.login();
+  }
 
-
-  retrieve(form: NgForm){
-    const email=form.value.email;
-    const password =  form.value.password;
-    this.loginService.login(email, password).
-    subscribe(
-      resData => {
-        // console.log(resData);
-        this.errorMessage=null;
+  login() {
+    const data = this.loginForm.value;
+    const loginData: Login = {
+      email: data.email!,
+      password: data.password!,
+    };
+    this.loginService.login(loginData).subscribe({
+      next: (user) => {
+        console.log(user);
+        localStorage.setItem('userData', JSON.stringify(user));
+      },
+      error: (err) => {
+        console.log(err);
+        if (err.status == 404 || err.status == 400) {
+          this.errorMessage = 'COMMON_ERROR';
+        } else {
+          this.errorMessage = 'UNKNOWN_ERROR';
+        }
+      },
+      complete: () => {
         this.router.navigate(['/main']);
       },
-      errorMessage => {
-        // console.log(errorMessage);
-        this.errorMessage = errorMessage;
-      }
-    );
+    });
   }
 
   signInWithGoogle() {
     this.loginService.googleSignIn();
   }
-
 }

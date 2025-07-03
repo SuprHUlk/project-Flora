@@ -3,7 +3,7 @@
  * Copyright Google LLC All Rights Reserved.
  *
  * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
+ * found in the LICENSE file at https://angular.dev/license
  */
 import ts from 'typescript';
 import { ExtendedTsCompilerHost, NgCompilerOptions } from '../ngtsc/core/api';
@@ -25,11 +25,6 @@ export interface CompilerOptions extends NgCompilerOptions, ts.CompilerOptions {
     i18nInFormat?: string;
     i18nInFile?: string;
     i18nInMissingTranslations?: 'error' | 'warning' | 'ignore';
-    /**
-     * Whether to generate .ngsummary.ts files that allow to use AOTed artifacts
-     * in JIT mode. This is off by default.
-     */
-    enableSummariesForJit?: boolean;
     /**
      * Whether to replace the `templateUrl` and `styleUrls` property in all
      * @Component decorators with inlined contents in `template` and `styles`

@@ -1,75 +1,125 @@
 <div>
-    <div class="container-md">
-            <div >
-                <div></div>
-                <div class="container text-center">
-                    <div class="row">
-                    <div class="col c-1">
-                        <div class="">
-                            <ngb-carousel *ngIf="images">
-                                <ng-template ngbSlide>
-                                    <div class="picsum-img-wrapper">
-                                        <img class="foto" [src]="images[0]" alt="Random first slide" />
-                                    </div>
-                                    <div class="carousel-caption">
-                                        <h3>Greetings !!!</h3>
-                                        <p>The Flora CONNECTS thy thou soul desires🤍</p>
-                                    </div>
-                                </ng-template>
-                                <ng-template ngbSlide>
-                                    <div class="picsum-img-wrapper">
-                                        <img class="foto" [src]="images[1]" alt="Random second slide" />
-                                    </div>
-                                    <div class="carousel-caption">
-                                        <h3>Make Friends</h3>
-                                        <p>"One loyal friend is worth a ten thousand relative"</p>
-                                    </div>
-                                </ng-template>
-                                <ng-template ngbSlide>
-                                    <div class="picsum-img-wrapper">
-                                        <img class="foto" [src]="images[2]" alt="Random third slide" />
-                                    </div>
-                                    <div class="carousel-caption">
-                                        <h3>Relax!!</h3>
-                                        <p>"Sometimes talking to your pals is the only therapy you need"</p>
-                                    </div>
-                                </ng-template>
-                            </ngb-carousel>
-                        </div>
-                        </div>
-                    <div class="col">
-                        <h1 class="fancy">Flora</h1>
-                        <div class="error mt-3" *ngIf="errorMessage == 'COMMON_ERROR'">Sorry, your email or password was incorrect.</div>
-                        <div class="error mt-3" *ngIf="errorMessage == 'UNKNOWN_ERROR'">An unexpected error occurred!!</div>
-                        <form class="lel" #Auth="ngForm">
-                            <div class="row mb-3">
-                            <label for="inputEmail3" class="col-sm-3 col-form-label">Email :</label>
-                            <div class="col-sm-9">
-                                <input type="email" class="form-control" id="inputEmail3" [(ngModel)]="email" name="email" required email>
-                            </div>
-                            </div>
-                            <div class="row mb-3">
-                            <label for="inputPassword3" class="col-sm-3 col-form-label">Password :</label>
-                            <div class="col-sm-9">
-                                <input type="password" class="form-control" id="inputPassword3" [(ngModel)]="password" name="password" required>
-                            </div>
-                            </div>
-                            <button type="submit" class="css-button-sliding-to-left--green"  [disabled]=(!Auth.valid) (click)="retrieve(Auth)">Login</button>   
-                            <button type="submit" class="css-button-sliding-to-left--green" [routerLink]="['/signup']" >Signup</button>
-
-                        </form>
-                        <div class="logins">
-                        <div class="css-button-sliding-to-left--green">
-                            <img src="assets\icons\google.png"  class="icon" alt="">
-                            <button (click)="signInWithGoogle()" class="font">Sign in with Google</button>
-                        </div></div>
-                    </div>
-                    </div>
-                </div>
+  <div class="container-md">
+    <div>
+      <div></div>
+      <div class="container text-center">
+        <div class="row">
+          <div class="col c-1">
+            <div class="">
+              @if(images) {
+              <ngb-carousel>
+                <ng-template ngbSlide>
+                  <div class="picsum-img-wrapper">
+                    <img
+                      class="foto"
+                      [src]="images[0]"
+                      alt="Random first slide"
+                    />
+                  </div>
+                  <div class="carousel-caption">
+                    <h3>Greetings !!!</h3>
+                    <p>The Flora CONNECTS thy thou soul desires🤍</p>
+                  </div>
+                </ng-template>
+                <ng-template ngbSlide>
+                  <div class="picsum-img-wrapper">
+                    <img
+                      class="foto"
+                      [src]="images[1]"
+                      alt="Random second slide"
+                    />
+                  </div>
+                  <div class="carousel-caption">
+                    <h3>Make Friends</h3>
+                    <p>"One loyal friend is worth a ten thousand relative"</p>
+                  </div>
+                </ng-template>
+                <ng-template ngbSlide>
+                  <div class="picsum-img-wrapper">
+                    <img
+                      class="foto"
+                      [src]="images[2]"
+                      alt="Random third slide"
+                    />
+                  </div>
+                  <div class="carousel-caption">
+                    <h3>Relax!!</h3>
+                    <p>
+                      "Sometimes talking to your pals is the only therapy you
+                      need"
+                    </p>
+                  </div>
+                </ng-template>
+              </ngb-carousel>
+              }
             </div>
+          </div>
+          <div class="col">
+            <h1 class="fancy">Flora</h1>
+            @if(errorMessage == 'COMMON_ERROR') {
+            <div class="error mt-3">
+              Sorry, your email or password was incorrect.
+            </div>
+            } @if(errorMessage == 'UNKNOWN_ERROR') {
+            <div class="error mt-3">An unexpected error occurred!!</div>
+            }
+
+            <form class="lel" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+              <div class="row mb-3">
+                <label for="inputEmail3" class="col-sm-3 col-form-label"
+                  >Email :</label
+                >
+                <div class="col-sm-9">
+                  <input
+                    type="email"
+                    class="form-control"
+                    id="inputEmail3"
+                    formControlName="email"
+                    required
+                    email
+                  />
+                </div>
+              </div>
+              <div class="row mb-3">
+                <label for="inputPassword3" class="col-sm-3 col-form-label"
+                  >Password :</label
+                >
+                <div class="col-sm-9">
+                  <input
+                    type="password"
+                    class="form-control"
+                    id="inputPassword3"
+                    formControlName="password"
+                    required
+                  />
+                </div>
+              </div>
+              <button type="submit" class="css-button-sliding-to-left--green">
+                Login
+              </button>
+              <button
+                type="submit"
+                class="css-button-sliding-to-left--green"
+                [routerLink]="['/signup']"
+              >
+                Signup
+              </button>
+            </form>
+            <div class="logins">
+              <div class="css-button-sliding-to-left--green">
+                <img src="assets\icons\google.png" class="icon" alt="" />
+                <button (click)="signInWithGoogle()" class="font">
+                  Sign in with Google
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
+      </div>
+    </div>
+  </div>
 </div>
 
 <div class="owners">
-    <p>Salty Bear x SuprHUlk</p>
+  <p>SuprHUlk x Salty Bear</p>
 </div>

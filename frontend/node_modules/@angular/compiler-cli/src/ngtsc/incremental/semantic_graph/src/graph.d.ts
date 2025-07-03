@@ -3,7 +3,7 @@
  * Copyright Google LLC All Rights Reserved.
  *
  * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
+ * found in the LICENSE file at https://angular.dev/license
  */
 import { Expression } from '@angular/compiler';
 import { AbsoluteFsPath } from '../../../file_system';
@@ -28,7 +28,7 @@ export interface SemanticDependencyResult {
  */
 export declare class SemanticDepGraph {
     readonly files: Map<AbsoluteFsPath, Map<string, SemanticSymbol>>;
-    readonly symbolByDecl: Map<ClassDeclaration<import("../../../reflection").DeclarationNode>, SemanticSymbol>;
+    readonly symbolByDecl: Map<ClassDeclaration, SemanticSymbol>;
     /**
      * Registers a symbol in the graph. The symbol is given a unique identifier if possible, such that
      * its equivalent symbol can be obtained from a prior graph even if its declaration node has
