@@ -9,7 +9,12 @@ export function authMiddleware(
   next: NextFunction
 ): void {
   try {
-    const token = req.cookies.token;
+    const cookieHeader = req.headers.cookie;
+    let token: string | undefined;
+    if (cookieHeader) {
+      const match = cookieHeader.match(/token=([^;]+)/);
+      token = match ? match[1] : undefined;
+    }
     if (!token) {
       res.status(401).json({ message: "Unauthorized" });
       return;

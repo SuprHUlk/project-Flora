@@ -95,16 +95,18 @@ export class MainComponent {
   }
 
   onLogOut() {
-    this.userlist1 = this.afs.collection('users');
-    this.user1 = this.userlist1.snapshotChanges().pipe(
-      map((actions) => {
-        return actions.map((a) => {
-          const id = a.payload.doc.id;
-          return { id };
-        });
-      })
-    );
-    this.user1.pipe(take(1)).subscribe((res) => this.gettar(res));
+    // this.userlist1 = this.afs.collection('users');
+    // this.user1 = this.userlist1.snapshotChanges().pipe(
+    //   map((actions) => {
+    //     return actions.map((a) => {
+    //       const id = a.payload.doc.id;
+    //       return { id };
+    //     });
+    //   })
+    // );
+    // this.user1.pipe(take(1)).subscribe((res) => this.gettar(res));
+
+    this.loginService.logOut().subscribe();
   }
   // JSON.parse(localStorage.getItem('userData') || '{}').email
 

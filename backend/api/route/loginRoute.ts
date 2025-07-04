@@ -1,13 +1,15 @@
 import express from "express";
-import { email, auth, logout, verify } from "../controller/loginController";
+import {
+  email,
+  auth,
+  logout,
+  verify,
+  google,
+} from "../controller/loginController";
 import { authMiddleware } from "../middleware/auth";
 // import logger from "../../config/logger";
 
 const app = express.Router();
-
-const TOKEN_EXPIRATION_TIME: number = parseInt(
-  process.env.TOKEN_EXPIRATION_TIME!
-);
 
 app.post("/email", async (req, res) => {
   try {
@@ -22,14 +24,7 @@ app.post("/email", async (req, res) => {
 
 app.post("/auth", async (req, res) => {
   try {
-    const data = await auth(req.body);
-    res.cookie("token", data.json.token, {
-      httpOnly: true,
-      secure: true,
-      sameSite: "lax",
-      maxAge: TOKEN_EXPIRATION_TIME,
-    });
-    delete data.json["token"];
+    const data = await auth(req.body, res);
     res.status(data.status).json(data.json);
   } catch (err) {
     res.status(500).json(err);
@@ -54,8 +49,13 @@ app.get("/verify", authMiddleware, (req, res) => {
   }
 });
 
-// app.use('/google', (req, res) => {
-//   res.status(200).send('yes');
-// });
+app.use("/google", async (req, res) => {
+  try {
+    const data = await google(req.body, res);
+    res.status(data.status).json(data.json);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
 
 export default app;

@@ -12,23 +12,25 @@ const MONGO_DB_CONNECTION_STRING = process.env.MONGO_DB_CONNECTION_STRING!;
 
 const app = express();
 
-app.use(cors({
-  origin: 'http://localhost:4200', // Specify the exact origin instead of wildcard
-  credentials: true, // Allow credentials to be included
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With']
-}));
+app.use(
+  cors({
+    origin: "http://localhost:4200",
+    credentials: true,
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization", "X-Requested-With"],
+  })
+);
 
-const connect = async () => {
+async function connectMongoDB() {
   try {
     await mongoose.connect(MONGO_DB_CONNECTION_STRING);
     console.log("MongoDB connected");
   } catch (err) {
     console.log("MongoDB connection failed: " + err);
   }
-};
+}
 
-connect();
+connectMongoDB();
 
 // parse application/x-www-form-urlencoded and application/json
 app.use(bodyParser.urlencoded());

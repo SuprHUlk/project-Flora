@@ -4,8 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { LoginPageComponent } from './login-page/login-page.component';
-import { SignupPageComponent } from './signup-page/signup-page.component';
+
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {
   provideHttpClient,
@@ -41,12 +40,6 @@ import {
 import { AuthGuard } from './shared/auth.guard';
 import { FIREBASE_OPTIONS } from '@angular/fire/compat';
 
-const appRoutes: Routes = [
-  { path: '', component: LoginPageComponent },
-  { path: 'signup', component: SignupPageComponent },
-  { path: 'main', component: MainComponent, canActivate: [AuthGuard] },
-];
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -59,13 +52,7 @@ const appRoutes: Routes = [
     HomeComponent,
   ],
   bootstrap: [AppComponent],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    RouterModule.forRoot(appRoutes),
-    NgbModule,
-    FormsModule,
-  ],
+  imports: [BrowserModule, AppRoutingModule, NgbModule, FormsModule],
   providers: [
     ScreenTrackingService,
     UserTrackingService,

@@ -58,7 +58,19 @@ export class LoginPageComponent {
     });
   }
 
-  signInWithGoogle() {
-    this.loginService.googleSignIn();
+  async signInWithGoogle() {
+    this.loginService.googleSignIn().subscribe({
+      next: (user) => {
+        console.log(user);
+        localStorage.setItem('userData', JSON.stringify(user));
+      },
+      error: (err) => {
+        console.log(err);
+        this.errorMessage = 'UNKNOWN_ERROR';
+      },
+      complete: () => {
+        this.router.navigate(['/main']);
+      },
+    });
   }
 }

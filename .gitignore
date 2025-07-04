@@ -56,3 +56,5 @@ Thumbs.db
 /frontend/node_modules/
 
 /backend/.env
+
+firebase.json

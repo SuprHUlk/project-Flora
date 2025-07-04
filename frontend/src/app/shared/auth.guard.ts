@@ -11,7 +11,10 @@ export class AuthGuard {
 
   canActivate(): Observable<boolean> {
     return this.loginService.verify().pipe(
-      map(() => true),
+      map((res) => {
+        console.log(res);
+        return true;
+      }),
       catchError(() => {
         this.loginService.logOut();
         this.router.navigate(['/']);
