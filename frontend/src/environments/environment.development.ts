@@ -8,4 +8,5 @@ export const environment = {
     appId: '1:216549739585:web:e9c28646e474637e3d4ac0',
   },
   mongoDbBaseApiUrl: 'http://localhost:3000',
+  showLogs: true,
 };
