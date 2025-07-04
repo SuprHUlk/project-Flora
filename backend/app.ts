@@ -16,10 +16,10 @@ app.use(
   cors({
     origin: [
       "http://localhost:4200",
-      "https://chatflora.suprhulk.com/",
-      "https://project-flora-git-main-suprhulks-projects.vercel.app/",
-      "https://project-flora-suprhulks-projects.vercel.app/",
-      "https://project-flora.vercel.app/",
+      "https://chatflora.suprhulk.com",
+      "https://project-flora-git-main-suprhulks-projects.vercel.app",
+      "https://project-flora-suprhulks-projects.vercel.app",
+      "https://project-flora.vercel.app",
     ],
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
