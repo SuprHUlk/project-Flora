@@ -86,7 +86,11 @@ async function auth(loginBody: Login, res: ExpressResponse): Promise<Response> {
 }
 
 function logout(res: ExpressResponse): Response {
-  res.clearCookie("token");
+  res.clearCookie("token", {
+    httpOnly: true,
+    secure: true,
+    sameSite: "none",
+  });
   return { status: 200, json: { msg: "Logged out" } };
 }
 
