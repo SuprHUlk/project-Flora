@@ -14,7 +14,13 @@ const app = express();
 
 app.use(
   cors({
-    origin: "http://localhost:4200",
+    origin: [
+      "http://localhost:4200",
+      "https://chatflora.suprhulk.com/",
+      "https://project-flora-git-main-suprhulks-projects.vercel.app/",
+      "https://project-flora-suprhulks-projects.vercel.app/",
+      "https://project-flora.vercel.app/",
+    ],
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization", "X-Requested-With"],
