@@ -154,7 +154,7 @@ function addJWT(
   res.cookie("token", token, {
     httpOnly: true,
     secure: true,
-    sameSite: "lax",
+    sameSite: "none",
     maxAge: TOKEN_EXPIRATION_TIME,
   });
 }
