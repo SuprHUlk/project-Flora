@@ -68,43 +68,43 @@ export class ChatComponent {
     'Dec',
   ];
 
-  loader: boolean = true;
+  loader: boolean = false;
 
   em = JSON.parse(localStorage.getItem('userData') || '{}').email;
 
   ngOnInit() {
-    this.userlist = this.afs.collection(`users/${this.em}/Friends`, (ref) =>
-      ref.orderBy('epoch', 'desc')
-    );
-    this.user = this.userlist.snapshotChanges().pipe(
-      map((action) => {
-        return action.map((a) => {
-          if (a.payload.doc.exists) {
-            this.showError = false;
-          }
-          const email = a.payload.doc.id;
-          const f_name = a.payload.doc.data().f_name;
-          const last_message = a.payload.doc.data().last_message;
-          const time = a.payload.doc.data().time;
-          // this.af.ref(`users/${this.em}/[object File]`).getDownloadURL().subscribe(url =>{
-          //   this.img=url;
-          // });
-          return {
-            email,
-            f_name,
-            last_message,
-            time,
-          };
-        });
-      })
-    );
-    this.user.subscribe((res) => {
-      // console.log(res[0]);
-      if (this.flag) {
-        this.loader = false;
-        this.flag = false;
-      }
-    });
+    // this.userlist = this.afs.collection(`users/${this.em}/Friends`, (ref) =>
+    //   ref.orderBy('epoch', 'desc')
+    // );
+    // this.user = this.userlist.snapshotChanges().pipe(
+    //   map((action) => {
+    //     return action.map((a) => {
+    //       if (a.payload.doc.exists) {
+    //         this.showError = false;
+    //       }
+    //       const email = a.payload.doc.id;
+    //       const f_name = a.payload.doc.data().f_name;
+    //       const last_message = a.payload.doc.data().last_message;
+    //       const time = a.payload.doc.data().time;
+    //       // this.af.ref(`users/${this.em}/[object File]`).getDownloadURL().subscribe(url =>{
+    //       //   this.img=url;
+    //       // });
+    //       return {
+    //         email,
+    //         f_name,
+    //         last_message,
+    //         time,
+    //       };
+    //     });
+    //   })
+    // );
+    // this.user.subscribe((res) => {
+    //   // console.log(res[0]);
+    //   if (this.flag) {
+    //     this.loader = false;
+    //     this.flag = false;
+    //   }
+    // });
     // this.user.subscribe(res=>{
     //   console.log(res.length);
     //   if(res.length==0||res.length==null) {
@@ -121,27 +121,19 @@ export class ChatComponent {
     //         const doc:any = ref.data();
     //         this.friends.push({email:a.email,f_name:doc.FIRST_NAME})
     //       }
-
     //   })
     //   }
-
     //   )
     //  })
     // console.log(this.friends);
-
     // this.afs.doc(`users/${this.em}/Friends/${this.id}/`).get().subscribe(ref => {
     //   console.log(ref);
     //   if(!ref.exists){
-
     //     console.log("notfound")// //DOC DOES NOT EXIST
-
     //     }else{
-
     //     this.posts = ref.data();
-
     //     console.log("hello")
     //     console.log(this.posts) //LOG ENTIRE DOC
-
     //     }
     //   });
   }

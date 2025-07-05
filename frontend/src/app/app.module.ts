@@ -39,6 +39,7 @@ import {
 } from '@angular/fire/remote-config';
 import { AuthGuard } from './shared/auth.guard';
 import { FIREBASE_OPTIONS } from '@angular/fire/compat';
+import { TimeAgoPipe } from './pipes/time-ago.pipe';
 
 @NgModule({
   declarations: [
@@ -52,7 +53,13 @@ import { FIREBASE_OPTIONS } from '@angular/fire/compat';
     HomeComponent,
   ],
   bootstrap: [AppComponent],
-  imports: [BrowserModule, AppRoutingModule, NgbModule, FormsModule],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    NgbModule,
+    FormsModule,
+    TimeAgoPipe,
+  ],
   providers: [
     ScreenTrackingService,
     UserTrackingService,
