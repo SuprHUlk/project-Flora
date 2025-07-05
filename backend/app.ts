@@ -6,6 +6,7 @@ import bodyParser from "body-parser";
 import mongoose from "mongoose";
 
 import loginRoute from "./api/route/loginRoute";
+import letterRoute from "./api/route/letterRoutes";
 
 const PORT = process.env.PORT!;
 const MONGO_DB_CONNECTION_STRING = process.env.MONGO_DB_CONNECTION_STRING!;
@@ -44,6 +45,7 @@ app.use(bodyParser.json());
 
 //Routes
 app.use("/login", loginRoute);
+app.use("/letter", letterRoute);
 
 app.use("/", (_, res) => {
   res.status(200).send("OK");

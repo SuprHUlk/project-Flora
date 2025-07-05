@@ -104,7 +104,6 @@ async function google(
 ): Promise<Response> {
   let _id = "";
   const hashedPass = bcrypt.hashSync(userBody.password, 10);
-  userBody.password = hashedPass;
 
   try {
     try {
@@ -115,6 +114,7 @@ async function google(
 
       _id = userMongoDb!._id.toString();
     } catch (err) {
+      userBody.password = hashedPass;
       _id = await addUser(userBody);
     } finally {
       addJWT(_id, userBody.email, userBody.username, res);
