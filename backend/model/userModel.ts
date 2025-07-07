@@ -2,22 +2,29 @@ import { Schema, model } from "mongoose";
 import mongooseUniqueValidator from "mongoose-unique-validator";
 
 export interface IUser {
-  _id?: string;
-  fname: string;
-  lname: string;
-  username: string;
-  email: string;
-  password: string;
-  friends: string[];
+    _id?: string;
+    fname: string;
+    lname: string;
+    username: string;
+    email: string;
+    password: string;
+    friends: string[];
+    photoUrl?: string;
 }
 
 const userSchema = new Schema<IUser>({
-  fname: { type: String, require: true },
-  lname: { type: String, require: true },
-  username: { type: String, require: true, unique: true },
-  email: { type: String, require: true, unique: true },
-  password: { type: String, require: true },
-  friends: { type: [String], require: true, default: [] },
+    fname: { type: String, require: true },
+    lname: { type: String, require: true },
+    username: { type: String, require: true, unique: true },
+    email: { type: String, require: true, unique: true },
+    password: { type: String, require: true },
+    friends: { type: [String], require: true, default: [] },
+    photoUrl: {
+        type: String,
+        require: false,
+        default:
+            "https://static.vecteezy.com/system/resources/previews/001/840/618/large_2x/picture-profile-icon-male-icon-human-or-people-sign-and-symbol-free-vector.jpg",
+    },
 });
 
 mongooseUniqueValidator(userSchema);

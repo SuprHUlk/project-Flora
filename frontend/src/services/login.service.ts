@@ -12,6 +12,7 @@ import { environment } from 'src/environments/environment';
 import { Signup } from '../models/signup.model';
 import { Login, LoginResponseData } from '../models/login.model';
 import { getAuth, signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
+import { SocketService } from './shared/socket.service';
 
 interface refreshTokenResData {
   expires_in: string;
@@ -40,7 +41,8 @@ export class LoginService {
     private http: HttpClient,
     private router: Router,
     private fireauth: AngularFireAuth,
-    private afs: AngularFirestore
+    private afs: AngularFirestore,
+    private socketService: SocketService
   ) {
     this.productsRef = this.afs.collection<post>('users');
   }
@@ -122,11 +124,12 @@ export class LoginService {
       .pipe(
         tap((res) => {
           localStorage.removeItem('userData');
-          this.router.navigate(['/']);
+          this.socketService.getSocket().disconnect();
           if (this.tokenExpirationTimer) {
             clearTimeout(this.tokenExpirationTimer);
           }
           this.tokenExpirationTimer = null;
+          this.router.navigate(['/']);
         })
       );
   }

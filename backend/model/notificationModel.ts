@@ -1,6 +1,7 @@
 enum EventName {
     "letterReceived",
     "letterAccepted",
+    "messageReceived",
 }
 
 interface Notification {

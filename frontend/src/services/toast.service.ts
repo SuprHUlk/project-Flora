@@ -1,19 +1,14 @@
-import { Injectable, signal, TemplateRef } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 import { Toast } from 'src/models/toast.model';
-import { io } from 'socket.io-client';
-import { environment } from 'src/environments/environment';
+import { SocketService } from './shared/socket.service';
 
 @Injectable({ providedIn: 'root' })
 export class ToastService {
   private readonly _toasts = signal<Toast[]>([]);
   readonly toasts = this._toasts.asReadonly();
 
-  private readonly socketBaseUrl = environment.socketBaseUrl;
-
-  constructor() {
-    const socket = io(this.socketBaseUrl, {
-      withCredentials: true,
-    });
+  constructor(socketService: SocketService) {
+    const socket = socketService.getSocket();
 
     // socket.on('connect', () => {
     //   console.log(socket.id);
@@ -30,6 +25,15 @@ export class ToastService {
     });
 
     socket.on('letterAccepted', (res) => {
+      this.show({
+        classname: 'bg-success text-light',
+        delay: 15000,
+        message: res,
+        autohide: true,
+      });
+    });
+
+    socket.on('messageReceived', (res) => {
       this.show({
         classname: 'bg-success text-light',
         delay: 15000,

@@ -1,69 +1,108 @@
-<div class="loaderwindow" *ngIf="loader">
-    <img class="load" src="assets\loader.svg" alt="">
-  </div>
-  
-
-
-<div class="container-fluid" *ngIf="!loader">
-    <div class="friends-list">
-        <div class="heading">Chats</div>
-        <div class="cover">
-            <p class="error-message" *ngIf="showError">
-                Send a letter to make friends
-            </p>
-            <div class="friend" *ngFor="let friend of user | async let index=index;" [attr.data-index]="index" (click)="onContactClick(friend)">
-                <div class="image">
-                    <img class="ok" src="assets/pfp/pvz.jpeg" alt="">
-                </div>
-                <div class="wrapper">
-                    <p class="name">{{ friend.f_name }}</p>
-                    <p class="last-message">{{ friend.last_message }}</p>
-                </div>
-                <div class="time">{{ friend.time }}</div>
-            </div>   
-        </div> 
-    </div>
-    
-    <div class="chat-window">
-        <div class="show-instruction" *ngIf="!showTextField">
-            <h4 class="instruction">
-                <span id="one">Click on a Friend</span>
-                to send and receive messages
-                <span id="two"><i class="fa-solid fa-lock"></i>All messages are end to end encrypted</span>
-            </h4>
-        </div>
-        <div class="user-info" *ngIf="showTextField">
-            <div class="propic" title="Upload your pfp" style="background-image: url({{img}}); background-size: 90% 90%; background-position: center; background-repeat: no-repeat;"></div>
-            <div class="name">
-                <h4 class="currentUserFname">{{ currentUserFname }}</h4>
-                <p class="currentUserUname">{{ currentUserUname }}</p>
-            </div>
-            <div ngbDropdown class="dropdown">
-                <button type="button" class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>
-                    Menu
-                </button>
-                <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-                    <button (click)="deletechat()" ngbDropdownItem>Delete Friend</button>
-                </div>
-            </div>
-        </div>
-        <div #toScroll *ngIf="showTextField" class="message-window">
-            <div *ngFor="let message of posts | async">
-                <div *ngIf="message.email==currentuser" class="message friend-message">
-                    <strong>{{ message.message }}</strong>
-                    <p>{{ message.time }}</p>
-                </div>
-                <div *ngIf="message.email==em" class="message user-message">
-                    <strong>{{ message.message }}</strong>
-                    <p>{{ message.time }}</p>
-                </div>
-            </div>
-        </div>
-        <div *ngIf="showTextField" class="input mt-2">
-            
-            <div class="fancy-envelope"><i class="fa-solid fa-envelope"></i></div>
-            <input type="text" class="chatInput"  name="title" [(ngModel)]="msg" (keyup.enter)="send()">
-            <button class="btn btn-send btn-primary"  value="add a post" (click)="send()"><i class="fa-solid fa-arrow-right"></i></button>
-        </div>
-    </div>
+@if(loader) {
+<div class="loaderwindow">
+  <img class="load" src="assets\loader.svg" alt="" />
 </div>
+} @else {
+<div class="container-fluid">
+  <div class="friends-list">
+    <div class="heading">Chats</div>
+    <div class="cover">
+      <p class="error-message" *ngIf="showError">
+        Send a letter to make friends
+      </p>
+      @for(friend of friends; track friend._id; let idx = $index) {
+      <div
+        class="friend"
+        [attr.data-index]="idx"
+        (click)="onContactClick(friend)"
+      >
+        <div class="image">
+          <img class="ok" src="{{ friend.photoUrl }}" alt="" />
+        </div>
+        <div class="wrapper">
+          <p class="name">{{ friend.username }}</p>
+          <!-- <p class="last-message">{{ friend.last_message }}</p> -->
+        </div>
+        <!-- <div class="time">{{ friend.time }}</div> -->
+      </div>
+      }
+    </div>
+  </div>
+
+  <div class="chat-window">
+    <div class="show-instruction" *ngIf="!showTextField">
+      <h4 class="instruction">
+        <span id="one">Click on a Friend</span>
+        to send and receive messages
+        <span id="two"
+          ><i class="fa-solid fa-lock"></i>All messages are end to end
+          encrypted</span
+        >
+      </h4>
+    </div>
+    <div class="user-info" *ngIf="showTextField">
+      <div
+        class="propic"
+        title="Upload your pfp"
+        [style.background-image]="'url(' + img + ')'"
+        style="
+          background-size: 90% 90%;
+          background-position: center;
+          background-repeat: no-repeat;
+        "
+      ></div>
+      <div class="name">
+        <h4 class="currentUserFname">{{ currentUserFname }}</h4>
+        <p class="currentUserUname">{{ currentUserUname }}</p>
+      </div>
+      <div ngbDropdown class="dropdown">
+        <button
+          type="button"
+          class="btn btn-outline-primary"
+          id="dropdownBasic1"
+          ngbDropdownToggle
+        >
+          Menu
+        </button>
+        <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+          <button (click)="deletechat()" ngbDropdownItem>Delete Friend</button>
+        </div>
+      </div>
+    </div>
+    <div #toScroll *ngIf="showTextField" class="message-window">
+      @for(message of messages; track message._id; let idx = $index) {
+      @if(message.sender == currentUser) {
+      <div class="message friend-message">
+        <strong>{{ message.message }}</strong>
+        <p>{{ message.createdAt | timeAgo }}</p>
+      </div>
+      } @else {
+      <div class="message user-message">
+        <strong>{{ message.message }}</strong>
+        <p>{{ message.createdAt | timeAgo }}</p>
+      </div>
+      } }
+      <!-- <div *ngFor="let message of posts | async">
+        
+      </div> -->
+    </div>
+    <div *ngIf="showTextField" class="input mt-2">
+      <div class="fancy-envelope"><i class="fa-solid fa-envelope"></i></div>
+      <input
+        type="text"
+        class="chatInput"
+        name="title"
+        [(ngModel)]="msg"
+        (keyup.enter)="send()"
+      />
+      <button
+        class="btn btn-send btn-primary"
+        value="add a post"
+        (click)="send()"
+      >
+        <i class="fa-solid fa-arrow-right"></i>
+      </button>
+    </div>
+  </div>
+</div>
+}

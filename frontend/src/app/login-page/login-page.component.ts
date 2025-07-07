@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Login } from '../../models/login.model';
 import { Router } from '@angular/router';
-import { NgForm, Validators } from '@angular/forms';
+import { Validators } from '@angular/forms';
 import { LoginService } from 'src/services/login.service';
 import { ReactiveFormsModule, FormGroup, FormControl } from '@angular/forms';
 import { NgbCarouselModule } from '@ng-bootstrap/ng-bootstrap';

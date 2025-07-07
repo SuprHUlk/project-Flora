@@ -12,6 +12,9 @@ import { initSocket } from "./handler/socket";
 
 import loginRoute from "./api/route/loginRoute";
 import letterRoute from "./api/route/letterRoutes";
+import profileRoute from "./api/route/profileRoute";
+import chatRoute from "./api/route/chatRoute";
+
 import notificationMiddleware from "./api/middleware/notification";
 
 import logger from "./config/logger";
@@ -41,6 +44,8 @@ app.use(bodyParser.json());
 //Routes
 app.use("/login", loginRoute);
 app.use("/letter", letterRoute);
+app.use("/profile", profileRoute);
+app.use("/chat", chatRoute);
 
 app.use(notificationMiddleware);
 

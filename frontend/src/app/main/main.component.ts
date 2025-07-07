@@ -13,7 +13,6 @@ export class MainComponent {
   constructor(private loginService: LoginService) {}
   userDetails: User;
   userType: string = 'chat';
-  img = '';
 
   onLogOut() {
     this.loginService.logOut().subscribe();

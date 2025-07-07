@@ -8,6 +8,10 @@ import { map, take } from 'rxjs';
 import { orderBy, limit } from 'firebase/firestore';
 import { EmailAuthProvider } from 'firebase/auth';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
+import { ProfileService } from 'src/services/profile.service';
+import User, { Friend } from 'src/models/user.model';
+import { ChatService } from 'src/services/chat.service';
+import { ChatRequest, ChatResponse } from 'src/models/chat.model';
 
 interface Post {
   message: string;
@@ -30,20 +34,25 @@ interface friends {
   standalone: false,
 })
 export class ChatComponent {
-  constructor(public afs: AngularFirestore, private af: AngularFireStorage) {}
+  constructor(
+    public afs: AngularFirestore,
+    private af: AngularFireStorage,
+    private profileService: ProfileService,
+    private chatService: ChatService
+  ) {}
   @ViewChild('toScroll') toScroll: any;
   postsCol: AngularFirestoreCollection<Post>;
   posts: Observable<Post[]>;
   msg: string;
 
-  friends: { email: string; f_name: string }[] = [];
+  // friends: { email: string; f_name: string }[] = [];
 
   userlist: AngularFirestoreCollection<friends>;
   user: Observable<friends[]>;
-  currentuser: string;
+  currentUser: string;
   currentUserFname: string;
   currentUserUname: string;
-  messages: { message: string; email: string; timestamp: string }[] = [];
+
   f: string;
   img: string;
 
@@ -68,11 +77,17 @@ export class ChatComponent {
     'Dec',
   ];
 
+  friends: Friend[] = [];
+
   loader: boolean = false;
 
   em = JSON.parse(localStorage.getItem('userData') || '{}').email;
 
+  messages: ChatResponse[] = [];
+
   ngOnInit() {
+    this.getFriends();
+    this.getMessages();
     // this.userlist = this.afs.collection(`users/${this.em}/Friends`, (ref) =>
     //   ref.orderBy('epoch', 'desc')
     // );
@@ -145,109 +160,98 @@ export class ChatComponent {
   //   },3000)
   // }
 
-  onContactClick(friend: any) {
-    this.currentuser = friend.email;
-    this.postsCol = this.afs.collection(
-      `users/${this.em}/Friends/${friend.email}/messages`,
-      (ref) => ref.orderBy('timestamp').limitToLast(25)
-    );
-    this.posts = this.postsCol.snapshotChanges().pipe(
-      map((actions) => {
-        return actions.map((a) => {
-          const message = a.payload.doc.data().message;
-          const email = a.payload.doc.data().email;
-          const timestamp = a.payload.doc.data().timestamp;
-          const time = a.payload.doc.data().time;
-          // console.log(a.payload.doc.data());
-          this.toScroll.nativeElement.scrollTop =
-            this.toScroll.nativeElement.scrollHeight;
-          return { message, email, timestamp, time };
-        });
-      })
-    );
-    this.afs
-      .doc(`users/${friend.email}`)
-      .get()
-      .subscribe((ref) => {
-        const doc: any = ref.data();
-        this.currentUserFname = doc.FIRST_NAME;
-        this.currentUserUname = '@' + doc.USERNAME;
-        this.showTextField = true;
-      });
-    this.af
-      .ref(`users/${friend.email}/[object File]`)
-      .getDownloadURL()
-      .subscribe((url) => {
-        this.img = url;
-      });
-
-    setTimeout(() => {
-      // console.log("1");
-      this.toScroll.nativeElement.scrollTop =
-        this.toScroll.nativeElement.scrollHeight;
-    }, 2000);
+  getProfile() {
+    this.profileService.get().subscribe({
+      next: (res) => {
+        console.log(res);
+      },
+      error: (err) => {
+        console.log(err);
+      },
+      complete: () => {},
+    });
   }
 
-  getTimeStamp(now: any) {
-    const date = now.getDate();
-    const month = this.month[now.getMonth()];
-    const year = now.getFullYear();
-    const hours = now.getHours();
-    const minutes =
-      now.getMinutes() < 3 ? '0' + now.getMinutes() : now.getMinutes();
-    return month + ' ' + date + ', ' + year + ', ' + hours + ':' + minutes;
+  getFriends() {
+    this.profileService.getFriends().subscribe({
+      next: (res: Friend[]) => {
+        this.friends = res;
+        console.log(this.friends);
+      },
+      error: (err) => {
+        console.log(err);
+      },
+      complete: () => {},
+    });
+  }
+
+  getMessages() {
+    this.chatService.getMessages$().subscribe((res) => {
+      console.log(res);
+      this.messages = res;
+    });
+  }
+
+  onContactClick(friend: Friend) {
+    this.showTextField = true;
+    this.chatService.get(friend._id);
+    this.currentUser = friend._id;
+    // this.currentuser = friend.email;
+    // this.postsCol = this.afs.collection(
+    //   `users/${this.em}/Friends/${friend.email}/messages`,
+    //   (ref) => ref.orderBy('timestamp').limitToLast(25)
+    // );
+    // this.posts = this.postsCol.snapshotChanges().pipe(
+    //   map((actions) => {
+    //     return actions.map((a) => {
+    //       const message = a.payload.doc.data().message;
+    //       const email = a.payload.doc.data().email;
+    //       const timestamp = a.payload.doc.data().timestamp;
+    //       const time = a.payload.doc.data().time;
+    //       // console.log(a.payload.doc.data());
+    //       this.toScroll.nativeElement.scrollTop =
+    //         this.toScroll.nativeElement.scrollHeight;
+    //       return { message, email, timestamp, time };
+    //     });
+    //   })
+    // );
+    // this.afs
+    //   .doc(`users/${friend.email}`)
+    //   .get()
+    //   .subscribe((ref) => {
+    //     const doc: any = ref.data();
+    //     this.currentUserFname = doc.FIRST_NAME;
+    //     this.currentUserUname = '@' + doc.USERNAME;
+    //     this.showTextField = true;
+    //   });
+    // this.af
+    //   .ref(`users/${friend.email}/[object File]`)
+    //   .getDownloadURL()
+    //   .subscribe((url) => {
+    //     this.img = url;
+    //   });
+
+    // setTimeout(() => {
+    //   // console.log("1");
+    //   this.toScroll.nativeElement.scrollTop =
+    //     this.toScroll.nativeElement.scrollHeight;
+    // }, 2000);
   }
 
   send() {
-    if (this.msg != '' && this.msg != null) {
-      const now = new Date();
-      const timeStamp = now.getTime().toString();
-      this.afs
-        .collection(`users/${this.em}/Friends/${this.currentuser}/messages`)
-        .add({
-          email: this.em,
-          message: this.msg,
-          timestamp: timeStamp,
-          time: this.getTimeStamp(now),
-        })
-        .then();
-      this.afs
-        .collection(`users/${this.currentuser}/Friends/${this.em}/messages`)
-        .add({
-          email: this.em,
-          message: this.msg,
-          timestamp: timeStamp,
-          time: this.getTimeStamp(now),
-        })
-        .then();
-      this.afs
-        .collection(`users/${this.em}/Friends`)
-        .doc(this.currentuser)
-        .update({
-          last_message: this.msg,
-          time: this.getTimeStamp(now),
-          epoch: timeStamp,
-        });
-      this.afs
-        .collection(`users/${this.currentuser}/Friends`)
-        .doc(this.em)
-        .update({
-          last_message: this.msg,
-          time: this.getTimeStamp(now),
-          epoch: timeStamp,
-        });
+    if (this.msg.trim()) {
+      const chat: ChatRequest = {
+        message: this.msg,
+        receiver: this.currentUser,
+      };
+      this.chatService.send(chat);
       this.msg = '';
     }
   }
 
   deletechat() {
-    console.log(this.currentuser);
-    this.afs.doc(`users/${this.em}/Friends/${this.currentuser}`).delete();
-    this.afs.doc(`users/${this.currentuser}/Friends/${this.em}`).delete();
+    // console.log(this.currentuser);
+    // this.afs.doc(`users/${this.em}/Friends/${this.currentuser}`).delete();
+    // this.afs.doc(`users/${this.currentuser}/Friends/${this.em}`).delete();
   }
 }
-
-// handleSubmit(event){
-//   if (event.keyCode === 13) {
-//     this.send();
-//   }

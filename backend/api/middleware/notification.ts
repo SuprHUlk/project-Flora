@@ -51,4 +51,34 @@ async function notificationMiddleware(
     }
 }
 
+export function notificationMiddlewareSocket(notification: Notification) {
+    try {
+        logger.info("Notification middleware socket");
+        logger.info(notification);
+
+        if (!notification) {
+            return;
+        }
+
+        notification.receivers.forEach(async (receiver: string) => {
+            //check user is online
+            let sid: string | null = await getRedis().get("_id:" + receiver);
+
+            if (sid) {
+                sid = sid.split(":")[1];
+                logger.info("Sid: " + sid);
+                getIO()
+                    .to(sid)
+                    .emit(
+                        getEventNameString(notification.eventName),
+                        notification.message
+                    );
+            }
+        });
+    } catch (err) {
+        logger.error("Error in notification middleware");
+        logger.error(err);
+    }
+}
+
 export default notificationMiddleware;

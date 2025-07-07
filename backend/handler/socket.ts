@@ -2,7 +2,8 @@ import { Server } from "socket.io";
 import { Server as HttpSever } from "node:http";
 import { authMiddlewareSocket } from "../api/middleware/auth";
 import { getRedis } from "../database/redis";
-import letterEvent from "../api/event/letterEvent";
+import chatEvent from "../api/event/chatEvent";
+import { notificationMiddlewareSocket } from "../api/middleware/notification";
 
 let io: Server;
 
@@ -28,10 +29,10 @@ const initSocket = (server: HttpSever) => {
         await getRedis().set("_id:" + socket.user._id, "sid:" + socket.id);
 
         //register events
-        letterEvent(io, socket);
+        chatEvent(io, socket, notificationMiddlewareSocket);
 
-        socket.on("disconnect", async () => {
-            await getRedis().del("_id:" + socket.user._id);
+        socket.on("disconnect", () => {
+            getRedis().del("_id:" + socket.user._id);
         });
     });
 
