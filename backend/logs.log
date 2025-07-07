@@ -1,0 +1,193 @@
+{"level":"info","message":"Socket authenticated for user:","timestamp":"2025-07-07 10:03:22"}
+{"level":"info","message":{"_id":"6868befb23cdba525bfbfcb8","email":"ayushulk2002@gmail.com","exp":1755461140,"iat":1751861140,"username":"SuprHUlk"},"timestamp":"2025-07-07 10:03:22"}
+{"level":"info","message":[{"__v":1,"_id":"6868ba736b2cdc4148339ed7","email":"ayush123kumar.ak@gmail.com","fname":"Ayush","friends":["6868befb23cdba525bfbfcb8"],"lname":"Kumar","password":"$2b$10$Gun3WllqppVloWnmsuCouOBxbJTN/ZVK6iWlIvyA7A4Tcqvt4bnBy","username":"Ayush Kumar"},{"__v":1,"_id":"6868befb23cdba525bfbfcb8","email":"ayushulk2002@gmail.com","fname":"SuprHUlk","friends":["6868ba736b2cdc4148339ed7"],"password":"$2b$10$iKOZGT6lWDf5.8DWLL1Nb.ivsEeeKTvNWmFJjZRYm5JXU8MHG/hcq","username":"SuprHUlk"},{"__v":0,"_id":"6868cc7f3e37464d70d67e3a","email":"ayush@gmail.com","fname":"Ayush","friends":[],"lname":"Kumar","password":"$2b$10$zIfSJXCMK/k9y4NG3KhaaOWqC1Lfa/sDOkcW900gMTckIyuYB276u","username":"Ayush1"}],"timestamp":"2025-07-07 10:03:28"}
+{"level":"info","message":[{"__v":1,"_id":"6868befb23cdba525bfbfcb8","email":"ayushulk2002@gmail.com","fname":"SuprHUlk","friends":["6868ba736b2cdc4148339ed7"],"password":"$2b$10$iKOZGT6lWDf5.8DWLL1Nb.ivsEeeKTvNWmFJjZRYm5JXU8MHG/hcq","username":"SuprHUlk"},{"__v":0,"_id":"6868cc7f3e37464d70d67e3a","email":"ayush@gmail.com","fname":"Ayush","friends":[],"lname":"Kumar","password":"$2b$10$zIfSJXCMK/k9y4NG3KhaaOWqC1Lfa/sDOkcW900gMTckIyuYB276u","username":"Ayush1"}],"timestamp":"2025-07-07 10:03:28"}
+{"level":"info","message":{"__v":0,"_id":"6868cc7f3e37464d70d67e3a","email":"ayush@gmail.com","fname":"Ayush","friends":[],"lname":"Kumar","password":"$2b$10$zIfSJXCMK/k9y4NG3KhaaOWqC1Lfa/sDOkcW900gMTckIyuYB276u","username":"Ayush1"},"timestamp":"2025-07-07 10:03:28"}
+{"eventName":0,"level":"info","message":"Notification middleware Letter Received","receiver":"6868befb23cdba525bfbfcb8","timestamp":"2025-07-07 10:03:28"}
+{"level":"info","message":null,"timestamp":"2025-07-07 10:03:28"}
+{"level":"info","message":"Firebase Connected","timestamp":"2025-07-07 10:05:10"}
+{"level":"info","message":"Redis Connected","timestamp":"2025-07-07 10:05:10"}
+{"level":"info","message":"Listening on: 3000","timestamp":"2025-07-07 10:05:10"}
+{"level":"info","message":"MongoDB connected","timestamp":"2025-07-07 10:05:10"}
+{"level":"info","message":"Socket authenticated for user:","timestamp":"2025-07-07 10:05:26"}
+{"level":"info","message":{"_id":"6868befb23cdba525bfbfcb8","email":"ayushulk2002@gmail.com","exp":1755461140,"iat":1751861140,"username":"SuprHUlk"},"timestamp":"2025-07-07 10:05:26"}
+{"level":"info","message":[{"__v":1,"_id":"6868ba736b2cdc4148339ed7","email":"ayush123kumar.ak@gmail.com","fname":"Ayush","friends":["6868befb23cdba525bfbfcb8"],"lname":"Kumar","password":"$2b$10$Gun3WllqppVloWnmsuCouOBxbJTN/ZVK6iWlIvyA7A4Tcqvt4bnBy","username":"Ayush Kumar"},{"__v":1,"_id":"6868befb23cdba525bfbfcb8","email":"ayushulk2002@gmail.com","fname":"SuprHUlk","friends":["6868ba736b2cdc4148339ed7"],"password":"$2b$10$iKOZGT6lWDf5.8DWLL1Nb.ivsEeeKTvNWmFJjZRYm5JXU8MHG/hcq","username":"SuprHUlk"},{"__v":0,"_id":"6868cc7f3e37464d70d67e3a","email":"ayush@gmail.com","fname":"Ayush","friends":[],"lname":"Kumar","password":"$2b$10$zIfSJXCMK/k9y4NG3KhaaOWqC1Lfa/sDOkcW900gMTckIyuYB276u","username":"Ayush1"}],"timestamp":"2025-07-07 10:05:44"}
+{"level":"info","message":[{"__v":1,"_id":"6868befb23cdba525bfbfcb8","email":"ayushulk2002@gmail.com","fname":"SuprHUlk","friends":["6868ba736b2cdc4148339ed7"],"password":"$2b$10$iKOZGT6lWDf5.8DWLL1Nb.ivsEeeKTvNWmFJjZRYm5JXU8MHG/hcq","username":"SuprHUlk"},{"__v":0,"_id":"6868cc7f3e37464d70d67e3a","email":"ayush@gmail.com","fname":"Ayush","friends":[],"lname":"Kumar","password":"$2b$10$zIfSJXCMK/k9y4NG3KhaaOWqC1Lfa/sDOkcW900gMTckIyuYB276u","username":"Ayush1"}],"timestamp":"2025-07-07 10:05:44"}
+{"level":"info","message":{"__v":0,"_id":"6868cc7f3e37464d70d67e3a","email":"ayush@gmail.com","fname":"Ayush","friends":[],"lname":"Kumar","password":"$2b$10$zIfSJXCMK/k9y4NG3KhaaOWqC1Lfa/sDOkcW900gMTckIyuYB276u","username":"Ayush1"},"timestamp":"2025-07-07 10:05:44"}
+{"level":"info","message":"Notification middleware","timestamp":"2025-07-07 10:05:44"}
+{"eventName":0,"level":"info","message":"Letter Received","receiver":"6868befb23cdba525bfbfcb8","timestamp":"2025-07-07 10:05:44"}
+{"level":"info","message":null,"timestamp":"2025-07-07 10:05:44"}
+{"level":"info","message":"Firebase Connected","timestamp":"2025-07-07 10:06:29"}
+{"level":"info","message":"Redis Connected","timestamp":"2025-07-07 10:06:29"}
+{"level":"info","message":"Listening on: 3000","timestamp":"2025-07-07 10:06:29"}
+{"level":"info","message":"MongoDB connected","timestamp":"2025-07-07 10:06:29"}
+{"level":"info","message":"Socket authenticated for user:","timestamp":"2025-07-07 10:06:31"}
+{"level":"info","message":{"_id":"6868befb23cdba525bfbfcb8","email":"ayushulk2002@gmail.com","exp":1755461140,"iat":1751861140,"username":"SuprHUlk"},"timestamp":"2025-07-07 10:06:31"}
+{"level":"info","message":[{"__v":1,"_id":"6868ba736b2cdc4148339ed7","email":"ayush123kumar.ak@gmail.com","fname":"Ayush","friends":["6868befb23cdba525bfbfcb8"],"lname":"Kumar","password":"$2b$10$Gun3WllqppVloWnmsuCouOBxbJTN/ZVK6iWlIvyA7A4Tcqvt4bnBy","username":"Ayush Kumar"},{"__v":1,"_id":"6868befb23cdba525bfbfcb8","email":"ayushulk2002@gmail.com","fname":"SuprHUlk","friends":["6868ba736b2cdc4148339ed7"],"password":"$2b$10$iKOZGT6lWDf5.8DWLL1Nb.ivsEeeKTvNWmFJjZRYm5JXU8MHG/hcq","username":"SuprHUlk"},{"__v":0,"_id":"6868cc7f3e37464d70d67e3a","email":"ayush@gmail.com","fname":"Ayush","friends":[],"lname":"Kumar","password":"$2b$10$zIfSJXCMK/k9y4NG3KhaaOWqC1Lfa/sDOkcW900gMTckIyuYB276u","username":"Ayush1"}],"timestamp":"2025-07-07 10:06:33"}
+{"level":"info","message":[{"__v":1,"_id":"6868befb23cdba525bfbfcb8","email":"ayushulk2002@gmail.com","fname":"SuprHUlk","friends":["6868ba736b2cdc4148339ed7"],"password":"$2b$10$iKOZGT6lWDf5.8DWLL1Nb.ivsEeeKTvNWmFJjZRYm5JXU8MHG/hcq","username":"SuprHUlk"},{"__v":0,"_id":"6868cc7f3e37464d70d67e3a","email":"ayush@gmail.com","fname":"Ayush","friends":[],"lname":"Kumar","password":"$2b$10$zIfSJXCMK/k9y4NG3KhaaOWqC1Lfa/sDOkcW900gMTckIyuYB276u","username":"Ayush1"}],"timestamp":"2025-07-07 10:06:33"}
+{"level":"info","message":{"__v":1,"_id":"6868befb23cdba525bfbfcb8","email":"ayushulk2002@gmail.com","fname":"SuprHUlk","friends":["6868ba736b2cdc4148339ed7"],"password":"$2b$10$iKOZGT6lWDf5.8DWLL1Nb.ivsEeeKTvNWmFJjZRYm5JXU8MHG/hcq","username":"SuprHUlk"},"timestamp":"2025-07-07 10:06:33"}
+{"level":"info","message":"Notification middleware","timestamp":"2025-07-07 10:06:33"}
+{"eventName":0,"level":"info","message":"Letter Received","receiver":"6868befb23cdba525bfbfcb8","timestamp":"2025-07-07 10:06:33"}
+{"level":"info","message":"sid:ppkHQS9sWz9_z4_PAAAB","timestamp":"2025-07-07 10:06:33"}
+{"level":"info","message":"sid:ppkHQS9sWz9_z4_PAAAB","timestamp":"2025-07-07 10:06:33"}
+{"level":"info","message":"Firebase Connected","timestamp":"2025-07-07 10:08:05"}
+{"level":"info","message":"Redis Connected","timestamp":"2025-07-07 10:08:05"}
+{"level":"info","message":"Listening on: 3000","timestamp":"2025-07-07 10:08:05"}
+{"level":"info","message":"MongoDB connected","timestamp":"2025-07-07 10:08:05"}
+{"level":"info","message":"Socket authenticated for user:","timestamp":"2025-07-07 10:08:16"}
+{"level":"info","message":{"_id":"6868befb23cdba525bfbfcb8","email":"ayushulk2002@gmail.com","exp":1755461140,"iat":1751861140,"username":"SuprHUlk"},"timestamp":"2025-07-07 10:08:16"}
+{"level":"info","message":[{"__v":1,"_id":"6868ba736b2cdc4148339ed7","email":"ayush123kumar.ak@gmail.com","fname":"Ayush","friends":["6868befb23cdba525bfbfcb8"],"lname":"Kumar","password":"$2b$10$Gun3WllqppVloWnmsuCouOBxbJTN/ZVK6iWlIvyA7A4Tcqvt4bnBy","username":"Ayush Kumar"},{"__v":1,"_id":"6868befb23cdba525bfbfcb8","email":"ayushulk2002@gmail.com","fname":"SuprHUlk","friends":["6868ba736b2cdc4148339ed7"],"password":"$2b$10$iKOZGT6lWDf5.8DWLL1Nb.ivsEeeKTvNWmFJjZRYm5JXU8MHG/hcq","username":"SuprHUlk"},{"__v":0,"_id":"6868cc7f3e37464d70d67e3a","email":"ayush@gmail.com","fname":"Ayush","friends":[],"lname":"Kumar","password":"$2b$10$zIfSJXCMK/k9y4NG3KhaaOWqC1Lfa/sDOkcW900gMTckIyuYB276u","username":"Ayush1"}],"timestamp":"2025-07-07 10:08:22"}
+{"level":"info","message":[{"__v":1,"_id":"6868befb23cdba525bfbfcb8","email":"ayushulk2002@gmail.com","fname":"SuprHUlk","friends":["6868ba736b2cdc4148339ed7"],"password":"$2b$10$iKOZGT6lWDf5.8DWLL1Nb.ivsEeeKTvNWmFJjZRYm5JXU8MHG/hcq","username":"SuprHUlk"},{"__v":0,"_id":"6868cc7f3e37464d70d67e3a","email":"ayush@gmail.com","fname":"Ayush","friends":[],"lname":"Kumar","password":"$2b$10$zIfSJXCMK/k9y4NG3KhaaOWqC1Lfa/sDOkcW900gMTckIyuYB276u","username":"Ayush1"}],"timestamp":"2025-07-07 10:08:22"}
+{"level":"info","message":{"__v":0,"_id":"6868cc7f3e37464d70d67e3a","email":"ayush@gmail.com","fname":"Ayush","friends":[],"lname":"Kumar","password":"$2b$10$zIfSJXCMK/k9y4NG3KhaaOWqC1Lfa/sDOkcW900gMTckIyuYB276u","username":"Ayush1"},"timestamp":"2025-07-07 10:08:22"}
+{"level":"info","message":"Notification middleware","timestamp":"2025-07-07 10:08:22"}
+{"eventName":0,"level":"info","message":"Letter Received","receiver":"6868befb23cdba525bfbfcb8","timestamp":"2025-07-07 10:08:22"}
+{"level":"info","message":"sid:ViKh7B00fa15p36JAAAB","timestamp":"2025-07-07 10:08:22"}
+{"level":"info","message":"ViKh7B00fa15p36JAAAB","timestamp":"2025-07-07 10:08:22"}
+{"level":"info","message":"Firebase Connected","timestamp":"2025-07-07 10:09:06"}
+{"level":"info","message":"Redis Connected","timestamp":"2025-07-07 10:09:06"}
+{"level":"info","message":"Listening on: 3000","timestamp":"2025-07-07 10:09:06"}
+{"level":"info","message":"MongoDB connected","timestamp":"2025-07-07 10:09:07"}
+{"level":"info","message":"Firebase Connected","timestamp":"2025-07-07 10:09:09"}
+{"level":"info","message":"Redis Connected","timestamp":"2025-07-07 10:09:09"}
+{"level":"info","message":"Listening on: 3000","timestamp":"2025-07-07 10:09:09"}
+{"level":"info","message":"MongoDB connected","timestamp":"2025-07-07 10:09:10"}
+{"level":"info","message":"Firebase Connected","timestamp":"2025-07-07 10:09:15"}
+{"level":"info","message":"Redis Connected","timestamp":"2025-07-07 10:09:15"}
+{"level":"info","message":"Listening on: 3000","timestamp":"2025-07-07 10:09:15"}
+{"level":"info","message":"MongoDB connected","timestamp":"2025-07-07 10:09:15"}
+{"level":"info","message":"Firebase Connected","timestamp":"2025-07-07 10:09:29"}
+{"level":"info","message":"Redis Connected","timestamp":"2025-07-07 10:09:29"}
+{"level":"info","message":"Listening on: 3000","timestamp":"2025-07-07 10:09:29"}
+{"level":"info","message":"MongoDB connected","timestamp":"2025-07-07 10:09:29"}
+{"level":"info","message":"Firebase Connected","timestamp":"2025-07-07 10:09:41"}
+{"level":"info","message":"Redis Connected","timestamp":"2025-07-07 10:09:41"}
+{"level":"info","message":"Listening on: 3000","timestamp":"2025-07-07 10:09:41"}
+{"level":"info","message":"MongoDB connected","timestamp":"2025-07-07 10:09:41"}
+{"level":"info","message":"Firebase Connected","timestamp":"2025-07-07 10:10:28"}
+{"level":"info","message":"Redis Connected","timestamp":"2025-07-07 10:10:28"}
+{"level":"info","message":"Listening on: 3000","timestamp":"2025-07-07 10:10:28"}
+{"level":"info","message":"MongoDB connected","timestamp":"2025-07-07 10:10:29"}
+{"level":"info","message":"Firebase Connected","timestamp":"2025-07-07 10:12:26"}
+{"level":"info","message":"Redis Connected","timestamp":"2025-07-07 10:12:26"}
+{"level":"info","message":"Listening on: 3000","timestamp":"2025-07-07 10:12:26"}
+{"level":"info","message":"MongoDB connected","timestamp":"2025-07-07 10:12:26"}
+{"level":"info","message":"Firebase Connected","timestamp":"2025-07-07 10:12:53"}
+{"level":"info","message":"Redis Connected","timestamp":"2025-07-07 10:12:53"}
+{"level":"info","message":"Listening on: 3000","timestamp":"2025-07-07 10:12:53"}
+{"level":"info","message":"MongoDB connected","timestamp":"2025-07-07 10:12:54"}
+{"level":"info","message":"Firebase Connected","timestamp":"2025-07-07 10:13:57"}
+{"level":"info","message":"Redis Connected","timestamp":"2025-07-07 10:13:57"}
+{"level":"info","message":"Listening on: 3000","timestamp":"2025-07-07 10:13:57"}
+{"level":"info","message":"MongoDB connected","timestamp":"2025-07-07 10:13:57"}
+{"level":"info","message":"Firebase Connected","timestamp":"2025-07-07 10:15:22"}
+{"level":"info","message":"Redis Connected","timestamp":"2025-07-07 10:15:22"}
+{"level":"info","message":"Listening on: 3000","timestamp":"2025-07-07 10:15:22"}
+{"level":"info","message":"MongoDB connected","timestamp":"2025-07-07 10:15:23"}
+{"level":"info","message":"Firebase Connected","timestamp":"2025-07-07 10:15:38"}
+{"level":"info","message":"Redis Connected","timestamp":"2025-07-07 10:15:38"}
+{"level":"info","message":"Listening on: 3000","timestamp":"2025-07-07 10:15:38"}
+{"level":"info","message":"MongoDB connected","timestamp":"2025-07-07 10:15:38"}
+{"level":"info","message":"Firebase Connected","timestamp":"2025-07-07 10:16:49"}
+{"level":"info","message":"Redis Connected","timestamp":"2025-07-07 10:16:49"}
+{"level":"info","message":"Listening on: 3000","timestamp":"2025-07-07 10:16:49"}
+{"level":"info","message":"MongoDB connected","timestamp":"2025-07-07 10:16:49"}
+{"level":"info","message":"Firebase Connected","timestamp":"2025-07-07 10:16:58"}
+{"level":"info","message":"Redis Connected","timestamp":"2025-07-07 10:16:58"}
+{"level":"info","message":"Listening on: 3000","timestamp":"2025-07-07 10:16:58"}
+{"level":"info","message":"MongoDB connected","timestamp":"2025-07-07 10:16:59"}
+{"level":"info","message":"Firebase Connected","timestamp":"2025-07-07 10:18:42"}
+{"level":"info","message":"Redis Connected","timestamp":"2025-07-07 10:18:42"}
+{"level":"info","message":"Listening on: 3000","timestamp":"2025-07-07 10:18:42"}
+{"level":"info","message":"MongoDB connected","timestamp":"2025-07-07 10:18:42"}
+{"level":"info","message":"Firebase Connected","timestamp":"2025-07-07 10:19:24"}
+{"level":"info","message":"Redis Connected","timestamp":"2025-07-07 10:19:24"}
+{"level":"info","message":"Listening on: 3000","timestamp":"2025-07-07 10:19:24"}
+{"level":"info","message":"MongoDB connected","timestamp":"2025-07-07 10:19:24"}
+{"level":"info","message":"Firebase Connected","timestamp":"2025-07-07 10:24:34"}
+{"level":"info","message":"Redis Connected","timestamp":"2025-07-07 10:24:34"}
+{"level":"info","message":"Listening on: 3000","timestamp":"2025-07-07 10:24:34"}
+{"level":"info","message":"MongoDB connected","timestamp":"2025-07-07 10:24:34"}
+{"level":"info","message":"Firebase Connected","timestamp":"2025-07-07 10:25:47"}
+{"level":"info","message":"Redis Connected","timestamp":"2025-07-07 10:25:47"}
+{"level":"info","message":"Listening on: 3000","timestamp":"2025-07-07 10:25:47"}
+{"level":"info","message":"MongoDB connected","timestamp":"2025-07-07 10:25:48"}
+{"level":"info","message":"Firebase Connected","timestamp":"2025-07-07 11:36:13"}
+{"level":"info","message":"Redis Connected","timestamp":"2025-07-07 11:36:13"}
+{"level":"info","message":"Listening on: 3000","timestamp":"2025-07-07 11:36:13"}
+{"level":"info","message":"MongoDB connected","timestamp":"2025-07-07 11:36:13"}
+{"level":"info","message":"Firebase Connected","timestamp":"2025-07-07 11:36:23"}
+{"level":"info","message":"Redis Connected","timestamp":"2025-07-07 11:36:23"}
+{"level":"info","message":"Listening on: 3000","timestamp":"2025-07-07 11:36:23"}
+{"level":"info","message":"MongoDB connected","timestamp":"2025-07-07 11:36:23"}
+{"level":"info","message":"Socket authenticated for user:","timestamp":"2025-07-07 11:36:32"}
+{"level":"info","message":{"_id":"6868ba736b2cdc4148339ed7","email":"ayush123kumar.ak@gmail.com","exp":1755467743,"iat":1751867743,"username":"Ayush Kumar"},"timestamp":"2025-07-07 11:36:32"}
+{"level":"info","message":"Socket authenticated for user:","timestamp":"2025-07-07 11:40:25"}
+{"level":"info","message":{"_id":"6868ba736b2cdc4148339ed7","email":"ayush123kumar.ak@gmail.com","exp":1755467743,"iat":1751867743,"username":"Ayush Kumar"},"timestamp":"2025-07-07 11:40:25"}
+{"level":"info","message":"Socket authenticated for user:","timestamp":"2025-07-07 11:42:40"}
+{"level":"info","message":{"_id":"6868ba736b2cdc4148339ed7","email":"ayush123kumar.ak@gmail.com","exp":1755467743,"iat":1751867743,"username":"Ayush Kumar"},"timestamp":"2025-07-07 11:42:40"}
+{"level":"info","message":{"__v":1,"_id":"6868befb23cdba525bfbfcb8","email":"ayushulk2002@gmail.com","fname":"SuprHUlk","friends":["6868ba736b2cdc4148339ed7"],"password":"$2b$10$iKOZGT6lWDf5.8DWLL1Nb.ivsEeeKTvNWmFJjZRYm5JXU8MHG/hcq","username":"SuprHUlk"},"timestamp":"2025-07-07 11:45:07"}
+{"level":"info","message":"Notification middleware","timestamp":"2025-07-07 11:45:07"}
+{"eventName":0,"level":"info","message":"Letter Received","receivers":["6868befb23cdba525bfbfcb8"],"timestamp":"2025-07-07 11:45:07"}
+{"level":"info","message":{"__v":1,"_id":"6868befb23cdba525bfbfcb8","email":"ayushulk2002@gmail.com","fname":"SuprHUlk","friends":["6868ba736b2cdc4148339ed7"],"password":"$2b$10$iKOZGT6lWDf5.8DWLL1Nb.ivsEeeKTvNWmFJjZRYm5JXU8MHG/hcq","username":"SuprHUlk"},"timestamp":"2025-07-07 11:45:19"}
+{"level":"info","message":"Notification middleware","timestamp":"2025-07-07 11:45:19"}
+{"eventName":0,"level":"info","message":"Letter Received","receivers":["6868befb23cdba525bfbfcb8"],"timestamp":"2025-07-07 11:45:19"}
+{"level":"info","message":{"__v":0,"_id":"6868cc7f3e37464d70d67e3a","email":"ayush@gmail.com","fname":"Ayush","friends":[],"lname":"Kumar","password":"$2b$10$zIfSJXCMK/k9y4NG3KhaaOWqC1Lfa/sDOkcW900gMTckIyuYB276u","username":"Ayush1"},"timestamp":"2025-07-07 11:45:21"}
+{"level":"info","message":"Notification middleware","timestamp":"2025-07-07 11:45:21"}
+{"eventName":0,"level":"info","message":"Letter Received","receivers":["6868cc7f3e37464d70d67e3a"],"timestamp":"2025-07-07 11:45:21"}
+{"level":"info","message":{"__v":0,"_id":"6868cc7f3e37464d70d67e3a","email":"ayush@gmail.com","fname":"Ayush","friends":[],"lname":"Kumar","password":"$2b$10$zIfSJXCMK/k9y4NG3KhaaOWqC1Lfa/sDOkcW900gMTckIyuYB276u","username":"Ayush1"},"timestamp":"2025-07-07 11:45:22"}
+{"level":"info","message":"Notification middleware","timestamp":"2025-07-07 11:45:22"}
+{"eventName":0,"level":"info","message":"Letter Received","receivers":["6868cc7f3e37464d70d67e3a"],"timestamp":"2025-07-07 11:45:22"}
+{"level":"info","message":{"__v":0,"_id":"6868cc7f3e37464d70d67e3a","email":"ayush@gmail.com","fname":"Ayush","friends":[],"lname":"Kumar","password":"$2b$10$zIfSJXCMK/k9y4NG3KhaaOWqC1Lfa/sDOkcW900gMTckIyuYB276u","username":"Ayush1"},"timestamp":"2025-07-07 11:45:22"}
+{"level":"info","message":"Notification middleware","timestamp":"2025-07-07 11:45:23"}
+{"eventName":0,"level":"info","message":"Letter Received","receivers":["6868cc7f3e37464d70d67e3a"],"timestamp":"2025-07-07 11:45:23"}
+{"level":"info","message":{"__v":1,"_id":"6868befb23cdba525bfbfcb8","email":"ayushulk2002@gmail.com","fname":"SuprHUlk","friends":["6868ba736b2cdc4148339ed7"],"password":"$2b$10$iKOZGT6lWDf5.8DWLL1Nb.ivsEeeKTvNWmFJjZRYm5JXU8MHG/hcq","username":"SuprHUlk"},"timestamp":"2025-07-07 11:45:23"}
+{"level":"info","message":"Notification middleware","timestamp":"2025-07-07 11:45:23"}
+{"eventName":0,"level":"info","message":"Letter Received","receivers":["6868befb23cdba525bfbfcb8"],"timestamp":"2025-07-07 11:45:23"}
+{"level":"info","message":{"__v":0,"_id":"6868cc7f3e37464d70d67e3a","email":"ayush@gmail.com","fname":"Ayush","friends":[],"lname":"Kumar","password":"$2b$10$zIfSJXCMK/k9y4NG3KhaaOWqC1Lfa/sDOkcW900gMTckIyuYB276u","username":"Ayush1"},"timestamp":"2025-07-07 11:46:08"}
+{"level":"info","message":"Notification middleware","timestamp":"2025-07-07 11:46:08"}
+{"eventName":0,"level":"info","message":"Letter Received","receivers":["6868cc7f3e37464d70d67e3a"],"timestamp":"2025-07-07 11:46:08"}
+{"level":"info","message":{"__v":1,"_id":"6868befb23cdba525bfbfcb8","email":"ayushulk2002@gmail.com","fname":"SuprHUlk","friends":["6868ba736b2cdc4148339ed7"],"password":"$2b$10$iKOZGT6lWDf5.8DWLL1Nb.ivsEeeKTvNWmFJjZRYm5JXU8MHG/hcq","username":"SuprHUlk"},"timestamp":"2025-07-07 11:46:38"}
+{"level":"info","message":"Notification middleware","timestamp":"2025-07-07 11:46:38"}
+{"eventName":0,"level":"info","message":"Letter Received","receivers":["6868befb23cdba525bfbfcb8"],"timestamp":"2025-07-07 11:46:38"}
+{"level":"info","message":"Socket authenticated for user:","timestamp":"2025-07-07 11:47:19"}
+{"level":"info","message":{"_id":"6868befb23cdba525bfbfcb8","email":"ayushulk2002@gmail.com","exp":1755468858,"iat":1751868858,"username":"SuprHUlk"},"timestamp":"2025-07-07 11:47:19"}
+{"level":"info","message":{"__v":1,"_id":"6868befb23cdba525bfbfcb8","email":"ayushulk2002@gmail.com","fname":"SuprHUlk","friends":["6868ba736b2cdc4148339ed7"],"password":"$2b$10$iKOZGT6lWDf5.8DWLL1Nb.ivsEeeKTvNWmFJjZRYm5JXU8MHG/hcq","username":"SuprHUlk"},"timestamp":"2025-07-07 11:47:29"}
+{"level":"info","message":"Notification middleware","timestamp":"2025-07-07 11:47:29"}
+{"eventName":0,"level":"info","message":"Letter Received","receivers":["6868befb23cdba525bfbfcb8"],"timestamp":"2025-07-07 11:47:29"}
+{"level":"info","message":"Sid: c5kLTqJwnxaCiTpmAAAH","timestamp":"2025-07-07 11:47:29"}
+{"level":"info","message":"Socket authenticated for user:","timestamp":"2025-07-07 11:49:25"}
+{"level":"info","message":{"_id":"6868befb23cdba525bfbfcb8","email":"ayushulk2002@gmail.com","exp":1755468858,"iat":1751868858,"username":"SuprHUlk"},"timestamp":"2025-07-07 11:49:25"}
+{"level":"info","message":{"__v":0,"_id":"6868cc7f3e37464d70d67e3a","email":"ayush@gmail.com","fname":"Ayush","friends":[],"lname":"Kumar","password":"$2b$10$zIfSJXCMK/k9y4NG3KhaaOWqC1Lfa/sDOkcW900gMTckIyuYB276u","username":"Ayush1"},"timestamp":"2025-07-07 11:49:34"}
+{"level":"info","message":"Notification middleware","timestamp":"2025-07-07 11:49:34"}
+{"eventName":0,"level":"info","message":"Letter Received","receivers":["6868cc7f3e37464d70d67e3a"],"timestamp":"2025-07-07 11:49:34"}
+{"level":"info","message":{"__v":1,"_id":"6868befb23cdba525bfbfcb8","email":"ayushulk2002@gmail.com","fname":"SuprHUlk","friends":["6868ba736b2cdc4148339ed7"],"password":"$2b$10$iKOZGT6lWDf5.8DWLL1Nb.ivsEeeKTvNWmFJjZRYm5JXU8MHG/hcq","username":"SuprHUlk"},"timestamp":"2025-07-07 11:49:36"}
+{"level":"info","message":"Notification middleware","timestamp":"2025-07-07 11:49:36"}
+{"eventName":0,"level":"info","message":"Letter Received","receivers":["6868befb23cdba525bfbfcb8"],"timestamp":"2025-07-07 11:49:36"}
+{"level":"info","message":"Sid: dMbPzPjXP9Q_vu5zAAAJ","timestamp":"2025-07-07 11:49:36"}
+{"level":"info","message":"Socket authenticated for user:","timestamp":"2025-07-07 11:51:02"}
+{"level":"info","message":{"_id":"6868befb23cdba525bfbfcb8","email":"ayushulk2002@gmail.com","exp":1755468858,"iat":1751868858,"username":"SuprHUlk"},"timestamp":"2025-07-07 11:51:02"}
+{"level":"info","message":"Socket authenticated for user:","timestamp":"2025-07-07 11:51:17"}
+{"level":"info","message":{"_id":"6868befb23cdba525bfbfcb8","email":"ayushulk2002@gmail.com","exp":1755468858,"iat":1751868858,"username":"SuprHUlk"},"timestamp":"2025-07-07 11:51:17"}
+{"level":"info","message":{"__v":1,"_id":"6868befb23cdba525bfbfcb8","email":"ayushulk2002@gmail.com","fname":"SuprHUlk","friends":["6868ba736b2cdc4148339ed7"],"password":"$2b$10$iKOZGT6lWDf5.8DWLL1Nb.ivsEeeKTvNWmFJjZRYm5JXU8MHG/hcq","username":"SuprHUlk"},"timestamp":"2025-07-07 11:51:22"}
+{"level":"info","message":"Notification middleware","timestamp":"2025-07-07 11:51:22"}
+{"eventName":0,"level":"info","message":"Letter Received","receivers":["6868befb23cdba525bfbfcb8"],"timestamp":"2025-07-07 11:51:22"}
+{"level":"info","message":"Sid: oOpRiKBbyjapdf89AAAN","timestamp":"2025-07-07 11:51:22"}
+{"level":"info","message":{"__v":0,"_id":"6868cc7f3e37464d70d67e3a","email":"ayush@gmail.com","fname":"Ayush","friends":[],"lname":"Kumar","password":"$2b$10$zIfSJXCMK/k9y4NG3KhaaOWqC1Lfa/sDOkcW900gMTckIyuYB276u","username":"Ayush1"},"timestamp":"2025-07-07 11:51:23"}
+{"level":"info","message":"Notification middleware","timestamp":"2025-07-07 11:51:23"}
+{"eventName":0,"level":"info","message":"Letter Received","receivers":["6868cc7f3e37464d70d67e3a"],"timestamp":"2025-07-07 11:51:23"}
+{"level":"info","message":"Socket authenticated for user:","timestamp":"2025-07-07 11:51:36"}
+{"level":"info","message":{"_id":"6868befb23cdba525bfbfcb8","email":"ayushulk2002@gmail.com","exp":1755468858,"iat":1751868858,"username":"SuprHUlk"},"timestamp":"2025-07-07 11:51:36"}
+{"level":"info","message":"Socket authenticated for user:","timestamp":"2025-07-07 11:52:01"}
+{"level":"info","message":{"_id":"6868befb23cdba525bfbfcb8","email":"ayushulk2002@gmail.com","exp":1755468858,"iat":1751868858,"username":"SuprHUlk"},"timestamp":"2025-07-07 11:52:01"}
+{"level":"info","message":"Socket authenticated for user:","timestamp":"2025-07-07 11:53:06"}
+{"level":"info","message":{"_id":"6868befb23cdba525bfbfcb8","email":"ayushulk2002@gmail.com","exp":1755468858,"iat":1751868858,"username":"SuprHUlk"},"timestamp":"2025-07-07 11:53:06"}
+{"level":"info","message":"Socket authenticated for user:","timestamp":"2025-07-07 11:53:10"}
+{"level":"info","message":{"_id":"6868befb23cdba525bfbfcb8","email":"ayushulk2002@gmail.com","exp":1755468858,"iat":1751868858,"username":"SuprHUlk"},"timestamp":"2025-07-07 11:53:10"}
+{"level":"info","message":"Socket authenticated for user:","timestamp":"2025-07-07 11:53:40"}
+{"level":"info","message":{"_id":"6868befb23cdba525bfbfcb8","email":"ayushulk2002@gmail.com","exp":1755468858,"iat":1751868858,"username":"SuprHUlk"},"timestamp":"2025-07-07 11:53:40"}
+{"level":"info","message":"Socket authenticated for user:","timestamp":"2025-07-07 11:54:00"}
+{"level":"info","message":{"_id":"6868befb23cdba525bfbfcb8","email":"ayushulk2002@gmail.com","exp":1755468858,"iat":1751868858,"username":"SuprHUlk"},"timestamp":"2025-07-07 11:54:00"}
+{"level":"info","message":"Socket authenticated for user:","timestamp":"2025-07-07 11:54:51"}
+{"level":"info","message":{"_id":"6868befb23cdba525bfbfcb8","email":"ayushulk2002@gmail.com","exp":1755468858,"iat":1751868858,"username":"SuprHUlk"},"timestamp":"2025-07-07 11:54:51"}
+{"level":"info","message":"Socket authenticated for user:","timestamp":"2025-07-07 11:57:02"}
+{"level":"info","message":{"_id":"6868befb23cdba525bfbfcb8","email":"ayushulk2002@gmail.com","exp":1755468858,"iat":1751868858,"username":"SuprHUlk"},"timestamp":"2025-07-07 11:57:02"}

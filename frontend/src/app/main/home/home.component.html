@@ -21,10 +21,13 @@
 
   <div class="butdiv">
     @for(letter of letters; track letter._id; let idx = $index) {
-    <button class="letterbutton" (click)="showLetter(idx)">
+    <button
+      class="letterbutton"
+      (click)="showLetter(idx)"
+      [ngbTooltip]="'Received: ' + (letter.receivedDate! | timeAgo)"
+    >
       <img class="btnimg" src="assets\Home\lotushover.png" alt="" />
     </button>
-
     }
   </div>
 

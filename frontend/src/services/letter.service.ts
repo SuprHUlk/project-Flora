@@ -9,7 +9,7 @@ import { map } from 'rxjs';
 })
 export class LetterService {
   private readonly mongoDbBaseApiUrl: string =
-    environment.mongoDbBaseApiUrl + '/letter';
+    environment.baseApiUrl + '/letter';
   constructor(private http: HttpClient) {}
 
   send(letter: Letter) {

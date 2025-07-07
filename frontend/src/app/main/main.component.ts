@@ -14,6 +14,7 @@ export class MainComponent {
   userDetails: User;
   userType: string = 'chat';
   img = '';
+
   onLogOut() {
     this.loginService.logOut().subscribe();
   }

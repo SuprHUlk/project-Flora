@@ -40,6 +40,9 @@ import {
 import { AuthGuard } from './shared/auth.guard';
 import { FIREBASE_OPTIONS } from '@angular/fire/compat';
 import { TimeAgoPipe } from './pipes/time-ago.pipe';
+import { NgbToastModule } from '@ng-bootstrap/ng-bootstrap';
+import { ToastComponent } from './shared/toast/toast.component';
+import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -59,6 +62,9 @@ import { TimeAgoPipe } from './pipes/time-ago.pipe';
     NgbModule,
     FormsModule,
     TimeAgoPipe,
+    NgbToastModule,
+    ToastComponent,
+    NgbTooltipModule,
   ],
   providers: [
     ScreenTrackingService,

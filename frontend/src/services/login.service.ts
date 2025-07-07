@@ -35,7 +35,7 @@ export class LoginService {
   model: post;
   productsRef: AngularFirestoreCollection<post>;
   posts: Observable<post[]>;
-  private readonly mongoDbBaseApiUrl = environment.mongoDbBaseApiUrl + '/login';
+  private readonly mongoDbBaseApiUrl = environment.baseApiUrl + '/login';
   constructor(
     private http: HttpClient,
     private router: Router,
