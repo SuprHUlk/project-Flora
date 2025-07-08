@@ -59,4 +59,5 @@ Thumbs.db
 
 firebase.json
 
-*.logs
+*/*.logs
+backend/logs.log
