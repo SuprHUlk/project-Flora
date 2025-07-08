@@ -1,9 +1,10 @@
 export class ChatMessage {
-  $key?: string;
-  email?: string;
-  userName?: string;
-  message?: string;
-  timeSent?: Date = new Date();
+  _id: string;
+  message: string;
+  receiver: string;
+  sender: string;
+  createdAt: Date;
+  updatedAt: Date;
 }
 
 export interface ChatRequest {
@@ -13,9 +14,5 @@ export interface ChatRequest {
 
 export interface ChatResponse {
   _id: string;
-  message: string;
-  receiver: string;
-  sender: string;
-  createdAt: Date;
-  updatedAt: Date;
+  messages: ChatMessage[];
 }

@@ -25,7 +25,7 @@ async function getFriends(user: IUser): Promise<Response> {
             {
                 _id: { $in: friends },
             },
-            "_id username photoUrl"
+            "_id username photoUrl fname lname"
         );
         return { status: 200, json: users };
     } catch (err) {

@@ -4,7 +4,7 @@ interface IChat {
     sender: string;
     receiver: string;
     message: string;
-    createAt: Date;
+    createdAt: Date;
     updatedAt: Date;
 }
 

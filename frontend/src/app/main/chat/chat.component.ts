@@ -1,31 +1,9 @@
-import { Component, AfterViewChecked, ViewChild } from '@angular/core';
-// import { ChatService } from 'src/services/chat.service';
-import { AngularFireList } from '@angular/fire/compat/database';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { AngularFirestoreCollection } from '@angular/fire/compat/firestore';
-import { Observable, timeInterval } from 'rxjs';
-import { map, take } from 'rxjs';
-import { orderBy, limit } from 'firebase/firestore';
-import { EmailAuthProvider } from 'firebase/auth';
-import { AngularFireStorage } from '@angular/fire/compat/storage';
+import { Component } from '@angular/core';
 import { ProfileService } from 'src/services/profile.service';
-import User, { Friend } from 'src/models/user.model';
+import { Friend } from 'src/models/user.model';
 import { ChatService } from 'src/services/chat.service';
 import { ChatRequest, ChatResponse } from 'src/models/chat.model';
-
-interface Post {
-  message: string;
-  email: string;
-  timestamp: string;
-  time: string;
-}
-
-interface friends {
-  email: string;
-  f_name: string;
-  last_message: string;
-  time: string;
-}
+import { ToastService } from 'src/services/shared/toast.service';
 
 @Component({
   selector: 'app-chat',
@@ -35,142 +13,41 @@ interface friends {
 })
 export class ChatComponent {
   constructor(
-    public afs: AngularFirestore,
-    private af: AngularFireStorage,
     private profileService: ProfileService,
-    private chatService: ChatService
+    private chatService: ChatService,
+    private toastService: ToastService
   ) {}
-  @ViewChild('toScroll') toScroll: any;
-  postsCol: AngularFirestoreCollection<Post>;
-  posts: Observable<Post[]>;
+
   msg: string;
 
-  // friends: { email: string; f_name: string }[] = [];
+  currentUser: Friend;
 
-  userlist: AngularFirestoreCollection<friends>;
-  user: Observable<friends[]>;
-  currentUser: string;
-  currentUserFname: string;
-  currentUserUname: string;
-
-  f: string;
   img: string;
 
   showTextField: boolean = false;
-  showError: boolean = true;
-  flag: boolean = true;
-
-  element = document.getElementsByClassName('message-window'); // Replace 'myElement' with the ID of your element
-
-  month: string[] = [
-    'Jan',
-    'Feb',
-    'Mar',
-    'Apr',
-    'May',
-    'Jun',
-    'Jul',
-    'Aug',
-    'Sept',
-    'Oct',
-    'Nov',
-    'Dec',
-  ];
 
   friends: Friend[] = [];
 
-  loader: boolean = false;
+  loader: boolean = true;
 
-  em = JSON.parse(localStorage.getItem('userData') || '{}').email;
-
-  messages: ChatResponse[] = [];
+  chat: ChatResponse[] = [];
 
   ngOnInit() {
     this.getFriends();
     this.getMessages();
-    // this.userlist = this.afs.collection(`users/${this.em}/Friends`, (ref) =>
-    //   ref.orderBy('epoch', 'desc')
-    // );
-    // this.user = this.userlist.snapshotChanges().pipe(
-    //   map((action) => {
-    //     return action.map((a) => {
-    //       if (a.payload.doc.exists) {
-    //         this.showError = false;
-    //       }
-    //       const email = a.payload.doc.id;
-    //       const f_name = a.payload.doc.data().f_name;
-    //       const last_message = a.payload.doc.data().last_message;
-    //       const time = a.payload.doc.data().time;
-    //       // this.af.ref(`users/${this.em}/[object File]`).getDownloadURL().subscribe(url =>{
-    //       //   this.img=url;
-    //       // });
-    //       return {
-    //         email,
-    //         f_name,
-    //         last_message,
-    //         time,
-    //       };
-    //     });
-    //   })
-    // );
-    // this.user.subscribe((res) => {
-    //   // console.log(res[0]);
-    //   if (this.flag) {
-    //     this.loader = false;
-    //     this.flag = false;
-    //   }
-    // });
-    // this.user.subscribe(res=>{
-    //   console.log(res.length);
-    //   if(res.length==0||res.length==null) {
-    //     this.showErrorMessage=true;
-    //   }
-    // })
-    // this.user.subscribe(res =>{
-    //   res.forEach( a =>{
-    //     this.afs.doc(`users/${a.email}`).get().subscribe(ref =>{
-    //       if(!ref.exists){
-    //         console.log("notfound")// //DOC DOES NOT EXIST
-    //       }
-    //       else{
-    //         const doc:any = ref.data();
-    //         this.friends.push({email:a.email,f_name:doc.FIRST_NAME})
-    //       }
-    //   })
-    //   }
-    //   )
-    //  })
-    // console.log(this.friends);
-    // this.afs.doc(`users/${this.em}/Friends/${this.id}/`).get().subscribe(ref => {
-    //   console.log(ref);
-    //   if(!ref.exists){
-    //     console.log("notfound")// //DOC DOES NOT EXIST
-    //     }else{
-    //     this.posts = ref.data();
-    //     console.log("hello")
-    //     console.log(this.posts) //LOG ENTIRE DOC
-    //     }
-    //   });
   }
 
-  // load(){
-  //   this.loader=true;
-  //   setTimeout(() =>{
-  //     this.loader=false;
-  //   },3000)
+  // getProfile() {
+  //   this.profileService.get().subscribe({
+  //     next: (res) => {
+  //       console.log(res);
+  //     },
+  //     error: (err) => {
+  //       console.log(err);
+  //     },
+  //     complete: () => {},
+  //   });
   // }
-
-  getProfile() {
-    this.profileService.get().subscribe({
-      next: (res) => {
-        console.log(res);
-      },
-      error: (err) => {
-        console.log(err);
-      },
-      complete: () => {},
-    });
-  }
 
   getFriends() {
     this.profileService.getFriends().subscribe({
@@ -179,76 +56,43 @@ export class ChatComponent {
         console.log(this.friends);
       },
       error: (err) => {
+        this.toastService.error({
+          message: 'Error occurred: Please try again later.',
+          autohide: true,
+        });
         console.log(err);
       },
-      complete: () => {},
+      complete: () => {
+        this.loader = false;
+      },
     });
   }
 
   getMessages() {
     this.chatService.getMessages$().subscribe((res) => {
       console.log(res);
-      this.messages = res;
+      this.chat = res;
     });
   }
 
   onContactClick(friend: Friend) {
     this.showTextField = true;
     this.chatService.get(friend._id);
-    this.currentUser = friend._id;
-    // this.currentuser = friend.email;
-    // this.postsCol = this.afs.collection(
-    //   `users/${this.em}/Friends/${friend.email}/messages`,
-    //   (ref) => ref.orderBy('timestamp').limitToLast(25)
-    // );
-    // this.posts = this.postsCol.snapshotChanges().pipe(
-    //   map((actions) => {
-    //     return actions.map((a) => {
-    //       const message = a.payload.doc.data().message;
-    //       const email = a.payload.doc.data().email;
-    //       const timestamp = a.payload.doc.data().timestamp;
-    //       const time = a.payload.doc.data().time;
-    //       // console.log(a.payload.doc.data());
-    //       this.toScroll.nativeElement.scrollTop =
-    //         this.toScroll.nativeElement.scrollHeight;
-    //       return { message, email, timestamp, time };
-    //     });
-    //   })
-    // );
-    // this.afs
-    //   .doc(`users/${friend.email}`)
-    //   .get()
-    //   .subscribe((ref) => {
-    //     const doc: any = ref.data();
-    //     this.currentUserFname = doc.FIRST_NAME;
-    //     this.currentUserUname = '@' + doc.USERNAME;
-    //     this.showTextField = true;
-    //   });
-    // this.af
-    //   .ref(`users/${friend.email}/[object File]`)
-    //   .getDownloadURL()
-    //   .subscribe((url) => {
-    //     this.img = url;
-    //   });
-
-    // setTimeout(() => {
-    //   // console.log("1");
-    //   this.toScroll.nativeElement.scrollTop =
-    //     this.toScroll.nativeElement.scrollHeight;
-    // }, 2000);
+    this.currentUser = friend;
   }
 
   send() {
     if (this.msg.trim()) {
       const chat: ChatRequest = {
         message: this.msg,
-        receiver: this.currentUser,
+        receiver: this.currentUser._id,
       };
       this.chatService.send(chat);
       this.msg = '';
     }
   }
 
+  // TODO: Delete friend
   deletechat() {
     // console.log(this.currentuser);
     // this.afs.doc(`users/${this.em}/Friends/${this.currentuser}`).delete();

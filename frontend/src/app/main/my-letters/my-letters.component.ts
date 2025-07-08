@@ -1,11 +1,7 @@
 import { Component } from '@angular/core';
 import { Letter } from 'src/models/letter.model';
 import { LetterService } from 'src/services/letter.service';
-
-interface message {
-  message: string;
-  where: string;
-}
+import { ToastService } from 'src/services/shared/toast.service';
 
 @Component({
   selector: 'app-my-letters',
@@ -14,7 +10,10 @@ interface message {
   standalone: false,
 })
 export class MyLettersComponent {
-  constructor(private letterService: LetterService) {}
+  constructor(
+    private letterService: LetterService,
+    private toastService: ToastService
+  ) {}
   loader: boolean = true;
 
   letters: Letter[] = [];
@@ -38,6 +37,10 @@ export class MyLettersComponent {
       },
       error: (err) => {
         console.log(err);
+        this.toastService.error({
+          message: 'Error fetching your letters: Please try again later',
+          autohide: true,
+        });
       },
     });
   }

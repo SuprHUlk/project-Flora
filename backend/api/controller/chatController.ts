@@ -19,15 +19,40 @@ async function send(chatRequest: IChatRequest, user: IUser): Promise<Response> {
 
 async function get(friend: string, user: IUser): Promise<Response> {
     try {
-        const chats = await Chat.find({
-            $or: [
-                { sender: user._id, receiver: friend },
-                { sender: friend, receiver: user._id },
-            ],
-        })
-            .sort({ createdAt: 1 })
-            .limit(50);
-
+        const chats = await Chat.aggregate([
+            {
+                $match: {
+                    $or: [
+                        { sender: user._id, receiver: friend },
+                        { sender: friend, receiver: user._id },
+                    ],
+                },
+            },
+            {
+                $limit: 50,
+            },
+            {
+                $sort: { createdAt: 1 },
+            },
+            {
+                $group: {
+                    _id: {
+                        $dateToString: {
+                            format: "%Y-%m-%d",
+                            date: "$createdAt",
+                        },
+                    },
+                    messages: { $push: "$$ROOT" },
+                },
+            },
+            {
+                $sort: { _id: 1 },
+            },
+        ]);
+        chats.push({
+            _id: "Now",
+            messages: [],
+        });
         logger.info("Chats", chats);
         return { status: 200, json: chats };
     } catch (err) {

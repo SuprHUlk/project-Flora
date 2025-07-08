@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { LoginService } from 'src/services/login.service';
 
 import User from 'src/models/user.model';
+import { NotificationService } from 'src/services/notification.service';
 
 @Component({
   selector: 'app-main',
@@ -10,7 +11,10 @@ import User from 'src/models/user.model';
   standalone: false,
 })
 export class MainComponent {
-  constructor(private loginService: LoginService) {}
+  constructor(
+    private loginService: LoginService,
+    private notificationService: NotificationService
+  ) {}
   userDetails: User;
   userType: string = 'chat';
 
@@ -20,5 +24,6 @@ export class MainComponent {
 
   ngOnInit() {
     this.userDetails = JSON.parse(localStorage.getItem('userData') ?? '{}');
+    this.notificationService.listen();
   }
 }

@@ -175,12 +175,28 @@ p.last-message {
   transition-duration: 250ms;
 }
 
+.scroller {
+  overflow: auto;
+  height: 100%;
+  display: flex;
+  flex-direction: column-reverse;
+  overflow-anchor: auto !important;
+  background-image: url("src/assets/chat-bg.png");
+}
+
 .message-window {
   display: flex;
   flex-direction: column;
   flex-grow: 1;
-  overflow-y: auto;
-  min-height: 77vh;
+  /* overflow-y: auto; */
+  /* min-height: 77vh; */
+}
+
+p.date-collection {
+  align-self: center;
+  padding: 0 0.5rem;
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
 }
 
 .friend-message > strong {
@@ -224,7 +240,7 @@ p.last-message {
   margin-bottom: 1%;
   margin-right: 2%;
   font-family: "Roboto";
-  min-width: 40%;
+  width: 40%;
   align-self: end;
 }
 

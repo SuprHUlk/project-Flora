@@ -12,4 +12,6 @@ export interface Friend {
   _id: string;
   username: string;
   photoUrl: string;
+  fname: string;
+  lname: string;
 }

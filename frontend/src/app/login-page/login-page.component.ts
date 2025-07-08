@@ -6,6 +6,8 @@ import { LoginService } from 'src/services/login.service';
 import { ReactiveFormsModule, FormGroup, FormControl } from '@angular/forms';
 import { NgbCarouselModule } from '@ng-bootstrap/ng-bootstrap';
 import { RouterModule } from '@angular/router';
+import { ToastService } from 'src/services/shared/toast.service';
+import { Toast } from 'src/models/toast.model';
 
 @Component({
   selector: 'app-login-page',
@@ -22,11 +24,18 @@ export class LoginPageComponent {
     password: new FormControl('', [Validators.required]),
   });
 
-  constructor(private router: Router, private loginService: LoginService) {}
+  constructor(
+    private router: Router,
+    private loginService: LoginService,
+    private toastService: ToastService
+  ) {}
 
   onSubmit() {
     if (!this.loginForm.valid) {
-      alert('Please fill the form properly');
+      this.toastService.error({
+        message: 'Please fill the form properly',
+        autohide: true,
+      });
       return;
     }
 
@@ -46,10 +55,16 @@ export class LoginPageComponent {
       },
       error: (err) => {
         console.log(err);
+        const toast: Toast = {
+          message: '',
+          autohide: true,
+        };
         if (err.status == 404 || err.status == 400) {
-          this.errorMessage = 'COMMON_ERROR';
+          toast.message = 'Sorry, your email or password was incorrect.';
+          this.toastService.error(toast);
         } else {
-          this.errorMessage = 'UNKNOWN_ERROR';
+          toast.message = 'An unexpected error occurred!!';
+          this.toastService.error(toast);
         }
       },
       complete: () => {
@@ -66,9 +81,16 @@ export class LoginPageComponent {
       },
       error: (err) => {
         console.log(err);
-        this.errorMessage = 'UNKNOWN_ERROR';
+        this.toastService.error({
+          message: 'Login unsuccessful: UNKNOWN_ERROR',
+          autohide: true,
+        });
       },
       complete: () => {
+        this.toastService.show({
+          message: 'Login successful: Enjoy!!!',
+          autohide: true,
+        });
         this.router.navigate(['/main']);
       },
     });

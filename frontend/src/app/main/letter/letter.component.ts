@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { LetterService } from 'src/services/letter.service';
 import { Letter } from 'src/models/letter.model';
+import { ToastService } from 'src/services/shared/toast.service';
 
 @Component({
   selector: 'app-letter',
@@ -9,7 +10,10 @@ import { Letter } from 'src/models/letter.model';
   standalone: false,
 })
 export class LetterComponent {
-  constructor(private letterService: LetterService) {}
+  constructor(
+    private letterService: LetterService,
+    private toastService: ToastService
+  ) {}
   loader = true;
   letter: string = '';
 
@@ -26,7 +30,10 @@ export class LetterComponent {
 
   sendLetter() {
     if (!this.letter || this.letter.trim() === '') {
-      alert('Cannot send empty letters');
+      this.toastService.error({
+        message: 'Cannot send empty letters',
+        autohide: true,
+      });
       return;
     }
 
@@ -37,11 +44,17 @@ export class LetterComponent {
     this.letterService.send(letterRequest).subscribe({
       next: (res) => {
         console.log(res);
-        alert('Letter sent successfully');
+        this.toastService.show({
+          message: 'Letter sent successfully',
+          autohide: true,
+        });
       },
       error: (err) => {
         console.log(err);
-        alert('Cannot send letter. Please refresh the page.');
+        this.toastService.error({
+          message: 'Cannot send letter. Please refresh the page.',
+          autohide: true,
+        });
       },
       complete: () => {
         this.letter = '';

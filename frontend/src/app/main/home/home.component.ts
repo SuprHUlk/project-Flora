@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { LetterService } from 'src/services/letter.service';
 import { Letter } from 'src/models/letter.model';
+import { ToastService } from 'src/services/shared/toast.service';
+import { Toast } from 'src/models/toast.model';
 
 @Component({
   selector: 'app-home',
@@ -9,26 +11,21 @@ import { Letter } from 'src/models/letter.model';
   standalone: false,
 })
 export class HomeComponent {
-  constructor(private letterService: LetterService) {}
+  constructor(
+    private letterService: LetterService,
+    private toastService: ToastService
+  ) {}
 
-  display = false;
+  display: boolean = false;
   letterMessage: string = '';
-  loader = true;
+  loader: boolean = true;
 
   openedLetter: Letter | null;
 
   letters: Letter[] = [];
 
   ngOnInit() {
-    this.load(); //calling loader in home page
     this.getReceivedLetters();
-  }
-
-  load() {
-    this.loader = true;
-    setTimeout(() => {
-      this.loader = false;
-    }, 5500);
   }
 
   getReceivedLetters() {
@@ -39,6 +36,14 @@ export class HomeComponent {
       },
       error: (err) => {
         console.log(err);
+
+        this.toastService.error({
+          message: 'Error: Please refresh the page',
+          autohide: true,
+        });
+      },
+      complete: () => {
+        this.loader = false;
       },
     });
   }
@@ -47,11 +52,17 @@ export class HomeComponent {
     this.letterService.reject(this.openedLetter!).subscribe({
       next: (res) => {
         console.log(res);
-        alert('Letter reject: Nice job!!!');
+        this.toastService.show({
+          message: 'Letter rejected: Nice job!!!',
+          autohide: true,
+        });
       },
       error: (err) => {
-        alert('Cannot reject the letter: Please try again later');
-        console.log(err);
+        console.error(err);
+        this.toastService.error({
+          message: 'Cannot reject the letter: Please try again later',
+          autohide: true,
+        });
       },
       complete: () => {
         this.updateLettersList();
@@ -83,7 +94,10 @@ export class HomeComponent {
       },
       error: (err) => {
         console.log(err);
-        alert('Cannot accpet the letter: Please try again later');
+        this.toastService.error({
+          message: 'Cannot accpet the letter: Please try again later',
+          autohide: true,
+        });
       },
       complete: () => {
         this.updateLettersList();

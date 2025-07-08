@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ChatRequest, ChatResponse } from 'src/models/chat.model';
+import { ChatMessage, ChatRequest, ChatResponse } from 'src/models/chat.model';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { SocketService } from './shared/socket.service';
@@ -17,8 +17,8 @@ export class ChatService {
   constructor(private http: HttpClient, private socketService: SocketService) {
     this.socket = socketService.getSocket();
 
-    this.socket.on('chat:receive', (message: ChatResponse) => {
-      this.setMessages(message);
+    this.socket.on('chat:receive', (message: ChatMessage) => {
+      this.setMessage(message);
     });
   }
 
@@ -29,7 +29,7 @@ export class ChatService {
       })
       .subscribe((res) => {
         this.emptyMessages();
-        this.setMessages(res);
+        this.setChat(res);
       });
   }
 
@@ -37,18 +37,14 @@ export class ChatService {
     this.messages$.next([]);
   }
 
-  setMessages(message: ChatResponse[] | ChatResponse) {
-    if (Array.isArray(message)) {
-      this.messages$.next(message);
-    } else {
-      this.messages$.next([...this.messages$.getValue(), message]);
-    }
+  setChat(chats: ChatResponse[]) {
+    this.messages$.next(chats);
   }
 
   send(chat: ChatRequest) {
     console.log(chat);
     this.socket.emit('chat:send', chat);
-    const message: ChatResponse = {
+    const message: ChatMessage = {
       message: chat.message,
       receiver: chat.receiver,
       sender: '',
@@ -56,7 +52,19 @@ export class ChatService {
       createdAt: new Date(),
       updatedAt: new Date(),
     };
-    this.setMessages(message);
+    this.setMessage(message);
+  }
+
+  setMessage(message: ChatMessage) {
+    // if (Array.isArray(message)) {
+    //   this.messages$.next(message);
+    // } else {
+    //   this.messages$.next([...this.messages$.getValue(), message]);
+    // }
+    this.messages$
+      .getValue()
+      [this.messages$.getValue().length - 1].messages.push(message);
+    this.messages$.next(this.messages$.getValue());
   }
 
   getMessages$(): Observable<ChatResponse[]> {

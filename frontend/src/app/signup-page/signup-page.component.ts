@@ -9,6 +9,7 @@ import {
 } from '@angular/forms';
 
 import { Signup } from '../../models/signup.model';
+import { ToastService } from 'src/services/shared/toast.service';
 
 @Component({
   selector: 'app-signup-page',
@@ -28,7 +29,11 @@ export class SignupPageComponent {
     rePassword: new FormControl('', [Validators.required]),
   });
 
-  constructor(private loginService: LoginService, private router: Router) {}
+  constructor(
+    private loginService: LoginService,
+    private router: Router,
+    private toastService: ToastService
+  ) {}
 
   onSubmit() {
     const password = this.signupForm.get('password')!.value;
@@ -41,7 +46,10 @@ export class SignupPageComponent {
     }
 
     if (!this.signupForm.valid) {
-      alert('Please fill the form');
+      this.toastService.error({
+        message: 'Please fill the form',
+        autohide: true,
+      });
     }
 
     this.signup();
@@ -61,6 +69,10 @@ export class SignupPageComponent {
     this.loginService.signup(signUp).subscribe({
       next: (res) => {
         console.log(res);
+        this.toastService.show({
+          message: 'Signup successful: Please login to continue',
+          autohide: true,
+        });
       },
       error: (err) => {
         console.log(err.error.errors);
