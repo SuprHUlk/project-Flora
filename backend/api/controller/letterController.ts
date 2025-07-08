@@ -1,8 +1,4 @@
-import {
-    ILetter,
-    ILetterRequest,
-    ILetterResponse,
-} from "../../model/letterModel";
+import { ILetterRequest, ILetterResponse } from "../../model/letterModel";
 import { Response } from "../../model/responseModel";
 import { IUser } from "../../model/userModel";
 import User from "../../model/userModel";
@@ -65,7 +61,8 @@ async function reSend(
     try {
         let users = await User.find({});
 
-        const letter = await Letter.findOne({ _id: letterRequest._id });
+        const letter = (await Letter.findOne({ _id: letterRequest._id }))!;
+        const originalSender = (await User.findOne({ _id: letter.sender }))!;
 
         let notification: Notification | null = null;
 
@@ -82,7 +79,8 @@ async function reSend(
                 if (
                     !letter.pastReceiver.includes(usr._id.toString()) &&
                     usr._id.toString() != letter.sender &&
-                    usr._id?.toString() != letter.receiver
+                    usr._id.toString() != letter.receiver &&
+                    !originalSender.friends.includes(usr._id.toString())
                 ) {
                     return usr;
                 }

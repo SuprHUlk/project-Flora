@@ -1,5 +1,5 @@
 import logger from "../../config/logger";
-import { IChatRequest, Chat, IChat } from "../../model/chatModel";
+import { IChatRequest, Chat } from "../../model/chatModel";
 import { Response } from "../../model/responseModel";
 import { IUser } from "../../model/userModel";
 
