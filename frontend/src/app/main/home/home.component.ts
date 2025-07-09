@@ -91,6 +91,10 @@ export class HomeComponent {
     this.letterService.accept(this.openedLetter!).subscribe({
       next: (res: string) => {
         alert(res);
+        this.toastService.show({
+          message: res,
+          autohide: true,
+        });
       },
       error: (err) => {
         console.log(err);

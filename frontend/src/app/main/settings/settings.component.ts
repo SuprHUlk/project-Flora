@@ -1,9 +1,7 @@
 import { Component } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { AngularFirestoreCollection } from '@angular/fire/compat/firestore';
-import { Observable } from 'rxjs';
-import { AngularFireStorage } from '@angular/fire/compat/storage';
-import { finalize } from 'rxjs/operators';
+import { ToastService } from 'src/services/shared/toast.service';
+import { FormControl, FormGroup } from '@angular/forms';
+import { ProfileService } from 'src/services/profile.service';
 
 @Component({
   selector: 'app-settings',
@@ -12,45 +10,105 @@ import { finalize } from 'rxjs/operators';
   standalone: false,
 })
 export class SettingsComponent {
-  constructor(public afs: AngularFirestore, private af: AngularFireStorage) {}
+  constructor(
+    private profileService: ProfileService,
+    private toastService: ToastService
+  ) {}
   loader = false;
-  name: string;
-  password: string;
-  website: string;
-  bio: string;
-  email: string;
-  gender: string;
 
-  em = JSON.parse(localStorage.getItem('userData') || '{}').email;
-
-  path: string;
+  profileForm = new FormGroup({
+    fname: new FormControl(''),
+    lname: new FormControl(''),
+    password: new FormControl(''),
+    rePassword: new FormControl(''),
+    website: new FormControl(''),
+    bio: new FormControl(''),
+    gender: new FormControl(''),
+    photoUrl: new FormControl<File | null>(null),
+  });
 
   ngOnInit() {
     this.load();
   }
 
-  submit() {
-    this.afs
-      .doc(`users/${this.em}`)
-      .update({
-        FIRST_NAME: this.name,
-        PASSWORD: this.password,
-        BIO: this.bio,
-        GENDER: this.gender,
-        WEBSITE: this.website,
+  onSubmit() {
+    const fname = this.profileForm.get('fname')?.value?.trim();
+    const lname = this.profileForm.get('lname')?.value?.trim();
+    const password = this.profileForm.get('password')?.value?.trim();
+    const rePassword = this.profileForm.get('rePassword')?.value?.trim();
+    const bio = this.profileForm.get('bio')?.value?.trim();
+    const website = this.profileForm.get('website')?.value?.trim();
+    const gender = this.profileForm.get('gender')?.value?.trim();
+    const photoUrl = this.profileForm.get('photoUrl')?.value;
+
+    if (
+      !fname &&
+      !lname &&
+      !password &&
+      !gender &&
+      !bio &&
+      !website &&
+      !photoUrl
+    ) {
+      this.toastService.error({
+        message: 'Please fill the form',
+        autohide: true,
       });
-    console.log('ok');
+      return;
+    }
+
+    if (password && password !== rePassword) {
+      console.log(password);
+      console.log(rePassword);
+      this.toastService.error({
+        message: 'Password and rePassword should match',
+        autohide: true,
+      });
+      return;
+    }
+
+    const formData = new FormData();
+    if (fname) formData.append('fname', fname);
+    if (lname) formData.append('lname', lname);
+    if (password) formData.append('password', password);
+    if (gender) formData.append('gender', gender);
+    if (bio) formData.append('bio', bio);
+    if (website) formData.append('website', website);
+    if (photoUrl) formData.append('photoUrl', photoUrl);
+
+    for (const [key, value] of (formData as any).entries()) {
+      console.log(key, value);
+    }
+
+    this.profileService.edit(formData).subscribe({
+      next: (res: string) => {
+        this.toastService.show({
+          message: res,
+          autohide: true,
+        });
+      },
+      error: (err) => {
+        console.error(err);
+        this.toastService.error({
+          message: 'Cannot save the changes: Please try again later',
+          autohide: true,
+        });
+      },
+      complete: () => {
+        this.profileForm.reset();
+      },
+    });
   }
 
-  upload($event: any) {
-    this.path = $event.target.files[0];
-    this.uploadimage();
-  }
-
-  uploadimage() {
-    console.log(this.path);
-    this.af.upload(`users/${this.em}/${this.path}`, this.path);
-    alert('Image was added to your pfp! reload page ');
+  upload($event: Event) {
+    if (!($event.target as HTMLInputElement)) {
+      return;
+    }
+    const input = $event.target as HTMLInputElement;
+    const file = input && input.files ? input.files[0] : null;
+    this.profileForm.patchValue({
+      photoUrl: file,
+    });
   }
 
   load() {

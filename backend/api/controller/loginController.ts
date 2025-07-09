@@ -62,7 +62,6 @@ async function auth(loginBody: Login, res: ExpressResponse): Promise<Response> {
         }
 
         addJWT(user._id.toString(), user.email, user.password, res);
-
         return {
             status: 200,
             json: {
@@ -74,6 +73,7 @@ async function auth(loginBody: Login, res: ExpressResponse): Promise<Response> {
                     lname: user.lname,
                     username: user.username,
                     email: user.email,
+                    photoUrl: user.photoUrl,
                 },
             },
         };
@@ -102,22 +102,22 @@ async function google(
     userBody: IUser,
     res: ExpressResponse
 ): Promise<Response> {
-    let _id = "";
     const hashedPass = bcrypt.hashSync(userBody.password, 10);
 
     try {
         try {
+            //firebase throws error if user not found
             await getFirebase().auth().getUser(userBody.password);
             const userMongoDb =
                 (await User.findOne({ email: userBody.email })) ??
                 (await User.findOne({ username: userBody.username }));
 
-            _id = userMongoDb!._id.toString();
+            userBody = userMongoDb!;
         } catch (err) {
             userBody.password = hashedPass;
-            _id = await addUser(userBody);
+            userBody = await addUser(userBody);
         } finally {
-            addJWT(_id, userBody.email, userBody.username, res);
+            addJWT(userBody._id!, userBody.email, userBody.username, res);
 
             return {
                 status: 200,
@@ -125,11 +125,12 @@ async function google(
                     msg: "User login successfull",
                     ExpirationTime: TOKEN_EXPIRATION_TIME,
                     user: {
-                        _id,
+                        _id: userBody._id,
                         fname: userBody.fname,
                         lname: userBody.lname,
                         username: userBody.username,
                         email: userBody.email,
+                        photoUrl: userBody.photoUrl,
                     },
                 },
             };
@@ -163,7 +164,7 @@ function addJWT(
     });
 }
 
-async function addUser(userBody: IUser): Promise<string> {
+async function addUser(userBody: IUser): Promise<IUser> {
     try {
         const user = new User({
             fname: userBody.fname,
@@ -174,7 +175,7 @@ async function addUser(userBody: IUser): Promise<string> {
         });
 
         const savedUser = await user.save();
-        return savedUser._id.toString();
+        return savedUser;
     } catch (err) {
         throw err;
     }

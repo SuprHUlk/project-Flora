@@ -10,7 +10,10 @@ import {
   provideHttpClient,
   withInterceptorsFromDi,
 } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import {
+  FormsModule,
+  ReactiveFormsModule,
+} from '@angular/forms';
 import { MainComponent } from './main/main.component';
 import { ChatComponent } from './main/chat/chat.component';
 import { SettingsComponent } from './main/settings/settings.component';
@@ -49,11 +52,11 @@ import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
     AppComponent,
     MainComponent,
     ChatComponent,
-    SettingsComponent,
     LetterComponent,
     MyLettersComponent,
     AboutComponent,
     HomeComponent,
+    SettingsComponent,
   ],
   bootstrap: [AppComponent],
   imports: [
@@ -61,6 +64,7 @@ import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
     AppRoutingModule,
     NgbModule,
     FormsModule,
+    ReactiveFormsModule,
     TimeAgoPipe,
     NgbToastModule,
     ToastComponent,

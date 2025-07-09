@@ -1,6 +1,7 @@
 import express from "express";
 import { authMiddleware } from "../middleware/auth";
-import { get, getFriends } from "../controller/profileController";
+import { get, getFriends, edit } from "../controller/profileController";
+import upload from "../middleware/multer";
 
 const app = express.Router();
 
@@ -21,5 +22,19 @@ app.get("/getFriends", authMiddleware, async (req, res) => {
         res.status(500).json(err);
     }
 });
+
+app.post(
+    "/edit",
+    authMiddleware,
+    upload.single("photoUrl"),
+    async (req, res) => {
+        try {
+            const data = await edit(req.body, req.user, req.file?.path);
+            res.status(data.status).json(data.json);
+        } catch (err) {
+            res.status(500).json({ error: String(err) });
+        }
+    }
+);
 
 export default app;

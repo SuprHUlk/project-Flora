@@ -1,20 +1,20 @@
 <div class="wrapper">
   <div class="sidebar">
     <div class="back">
-      <div
+      <!-- <div
         class="propic"
         title="Upload your pfp"
         [style.z-index]="5"
         [style.background-image]="'url(' + userDetails.photoUrl + ')'"
         style="background-size: cover"
-      ></div>
-      <img src="assets/pfp/pvz.jpeg" alt="" class="pfp" />
+      ></div> -->
+
+      <img src="{{ userDetails.photoUrl }}" alt="" class="pfp" />
       <img src="assets/background.png" alt="" class="imagebackground" />
       <div class="namena">
         <h1 class="profilename">{{ userDetails!.username }}</h1>
       </div>
     </div>
-
     <ul>
       <li>
         <button

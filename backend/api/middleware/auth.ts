@@ -9,6 +9,14 @@ declare module "socket.io" {
     }
 }
 
+declare global {
+    namespace Express {
+        interface Request {
+            user?: any;
+        }
+    }
+}
+
 const SECRET_KEY: string = process.env.SECRET_KEY!;
 
 function authMiddleware(req: Request, res: Response, next: NextFunction): void {
@@ -33,6 +41,7 @@ function authMiddleware(req: Request, res: Response, next: NextFunction): void {
         }
 
         req.body.user = decoded;
+        req.user = decoded;
         next();
     } catch (err) {
         logger.error("Error in auth Middleware: ", { error: err });

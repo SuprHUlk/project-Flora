@@ -18,6 +18,7 @@
         "@types/express": "^5.0.3",
         "@types/jsonwebtoken": "^9.0.10",
         "@types/mongoose-unique-validator": "^1.0.9",
+        "@types/multer": "^2.0.0",
         "@upstash/redis": "^1.35.1",
         "bcryptjs": "^3.0.2",
         "body-parser": "^2.2.0",
@@ -28,8 +29,10 @@
         "jsonwebtoken": "^9.0.2",
         "mongoose": "^7.0.0",
         "mongoose-unique-validator": "^4.0.1",
+        "multer": "^2.0.1",
         "socket.io": "^4.8.1",
         "ts-node": "^10.9.2",
+        "uuid": "^11.1.0",
         "winston": "^3.17.0"
     }
 }

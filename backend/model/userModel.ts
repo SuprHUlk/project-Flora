@@ -10,6 +10,9 @@ export interface IUser {
     password: string;
     friends: string[];
     photoUrl?: string;
+    website?: string;
+    bio?: string;
+    gender?: string;
 }
 
 const userSchema = new Schema<IUser>({
@@ -25,6 +28,9 @@ const userSchema = new Schema<IUser>({
         default:
             "https://static.vecteezy.com/system/resources/previews/001/840/618/large_2x/picture-profile-icon-male-icon-human-or-people-sign-and-symbol-free-vector.jpg",
     },
+    website: { type: String, required: false },
+    bio: { type: String, require: false },
+    gender: { type: String, require: false },
 });
 
 mongooseUniqueValidator(userSchema);

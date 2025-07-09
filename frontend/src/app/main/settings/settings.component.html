@@ -1,61 +1,116 @@
-<div class="loaderwindow" *ngIf="loader">
-    <img class="load" src="assets\loader.svg" alt="">
-  </div>
-  
-
-<div class="container-fluid" *ngIf="!loader">
-    <div class="'first">
-        
-            <h1 class="fancy">Settings</h1>
-            <label for="exampleInputEmail1" class="form-label">Name</label>
-            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" [(ngModel)]="name">
-            <div id="emailHelp" class="form-text">Help people discover your account by using the name you're known by: either your full name, nickname, or business name</div>
-            <label for="exampleInputEmail1" class="form-label">Password</label>
-            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" [(ngModel)]="password">
-
-            
-            <label for="exampleInputEmail1" class="form-label">Website</label>
-            <input type="text" class="form-control" id="exampleInputEmail1" [(ngModel)]="website">
-    
-            <label for="exampleFormControlTextarea1" class="form-label">Bio</label>
-            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" [(ngModel)]="bio"></textarea >
-            <p class="heading">Personal Information</p>
-            <div id="emailHelp" class="form-text second">Provide your personal information, even if the account is used for a business, a pet or something else. This won't be a part of your public profile.</div>
-
-
-            <label for="inputState" class="form-label">Gender</label>
-            <select id="inputState" class="form-select" [(ngModel)]="gender">
-                <option>Male</option>
-                <option>Female</option>
-                <option>Combo</option>
-                <option>Faggot</option>
-                <option>Lesbian</option>
-                <option>hai kuch abhi pta ni chla hai</option>
-            </select>
-            <br>
-            <div class="layout">
-            <button type="submit" class="btn" (click)="submit()">Submit</button>
-            <div class="uploader" >
-                <label for="uploaderphoto">Change Profile pic</label>
-                <input class="fileup" id="uploaderphoto"  type="file" (change)="upload($event)">
-            </div>
-            
-        </div>
-            <!-- <button type="submit" class="btn" (click)="uploadimage()">Upload Image</button> -->
-    </div>
-    
-    <div class="second">
-        <div class="instruction">
-            <h1 >Instruction</h1>
-            <p>Sign up  and choose a username that clearly represents your identity.</p>
-            <br>
-            <p>
-                <br> <b>Customize your profile:</b> <br>
-
-                Add a profile photo and  a biography .This will help other users discover your content and connect with you.
-                
-                </p>
-        </div>
-        <img src="assets\Settings\wallpaper.jpg" class="img-fluid" alt="Responsive image">
-    </div>
+@if(loader) {
+<div class="loaderwindow">
+  <img class="load" src="assets\loader.svg" alt="" />
 </div>
+} @else {
+<div class="container-fluid">
+  <form class="first" [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+    <h1 class="fancy">Settings</h1>
+    <label for="fname" class="form-label">First Name</label>
+    <input
+      type="text"
+      class="form-control"
+      id="fname"
+      aria-describedby="emailHelp"
+      formControlName="fname"
+    />
+    <label for="lname" class="form-label">Last Name</label>
+    <input
+      type="text"
+      class="form-control"
+      id="lname"
+      aria-describedby="emailHelp"
+      formControlName="lname"
+    />
+    <div id="emailHelp" class="form-text">
+      Help people discover your account by using the name you're known by:
+      either your full name, nickname, or business name
+    </div>
+    <label for="password" class="form-label">Password</label>
+    <input
+      type="password"
+      class="form-control"
+      id="password"
+      aria-describedby="emailHelp"
+      formControlName="password"
+    />
+
+    <label for="rePassword" class="form-label">Re-type Password</label>
+    <input
+      type="password"
+      class="form-control"
+      id="rePassword"
+      aria-describedby="emailHelp"
+      formControlName="rePassword"
+    />
+
+    <label for="website" class="form-label">Website</label>
+    <input
+      type="text"
+      class="form-control"
+      id="website"
+      formControlName="website"
+    />
+
+    <label for="bio" class="form-label">Bio</label>
+    <textarea
+      class="form-control"
+      id="bio"
+      rows="3"
+      formControlName="bio"
+    ></textarea>
+    <p class="heading">Personal Information</p>
+    <div id="emailHelp" class="form-text second">
+      Provide your personal information, even if the account is used for a
+      business, a pet or something else. This won't be a part of your public
+      profile.
+    </div>
+
+    <label for="inputState" class="form-label">Gender</label>
+    <select id="inputState" class="form-select" formControlName="gender">
+      <option>Male</option>
+      <option>Female</option>
+      <option>Combo</option>
+      <option>Faggot</option>
+      <option>Lesbian</option>
+      <option>hai kuch abhi pta ni chla hai</option>
+    </select>
+    <br />
+    <div class="layout">
+      <button type="submit" class="btn">Submit</button>
+      <div class="uploader">
+        <label for="uploaderphoto">Change Profile pic</label>
+        <input
+          class="fileup"
+          id="uploaderphoto"
+          type="file"
+          (change)="upload($event)"
+        />
+      </div>
+    </div>
+    <!-- <button type="submit" class="btn" (click)="uploadimage()">Upload Image</button> -->
+  </form>
+
+  <div class="second">
+    <div class="instruction">
+      <h1>Instruction</h1>
+      <p>
+        Sign up and choose a username that clearly represents your identity.
+      </p>
+      <br />
+      <p>
+        <br />
+        <b>Customize your profile:</b> <br />
+
+        Add a profile photo and a biography .This will help other users discover
+        your content and connect with you.
+      </p>
+    </div>
+    <img
+      src="assets\Settings\wallpaper.jpg"
+      class="img-fluid"
+      alt="Responsive image"
+    />
+  </div>
+</div>
+}

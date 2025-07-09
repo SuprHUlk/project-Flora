@@ -9,6 +9,7 @@ function connectFirebase() {
     try {
         firebaseApp = admin.initializeApp({
             credential: admin.credential.cert(FIREBASE_CONFIG_PATH),
+            storageBucket: "project-flora2.firebasestorage.app",
         });
         logger.info("Firebase Connected");
     } catch (err) {

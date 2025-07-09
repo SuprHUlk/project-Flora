@@ -16,7 +16,7 @@ export class MainComponent {
     private notificationService: NotificationService
   ) {}
   userDetails: User;
-  userType: string = 'chat';
+  userType: string = 'Home';
 
   onLogOut() {
     this.loginService.logOut().subscribe();
@@ -24,6 +24,7 @@ export class MainComponent {
 
   ngOnInit() {
     this.userDetails = JSON.parse(localStorage.getItem('userData') ?? '{}');
+    console.log(this.userDetails);
     this.notificationService.listen();
   }
 }

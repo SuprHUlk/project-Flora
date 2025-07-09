@@ -5,7 +5,11 @@ export default interface User {
   username: string;
   _id: string;
   ExpirationTime: number;
-  photoUrl: string;
+  photoUrl: string | File | undefined | null;
+  gender?: string;
+  bio?: string;
+  website?: string;
+  password?: string;
 }
 
 export interface Friend {
