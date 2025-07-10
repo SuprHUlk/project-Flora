@@ -183,31 +183,42 @@ async function accept(
             return { status: 404, json: { msg: "Letter not found" } };
         }
 
-        const sender = await User.findOne({ _id: letter.sender });
-        const receiver = await User.findOne({ _id: user._id });
-        sender!.friends.push(receiver!._id);
-        receiver!.friends.push(sender!._id);
+        const sender = (await User.findOne({ _id: letter.sender }))!;
+        const receiver = (await User.findOne({ _id: user._id }))!;
+
+        if (
+            sender.friends.includes(receiver._id) &&
+            receiver.friends.includes(sender._id)
+        ) {
+            return {
+                status: 200,
+                json: {
+                    msg: "You are already friends with" + sender.username,
+                },
+            };
+        }
+
+        sender.friends.push(receiver._id);
+        receiver.friends.push(sender._id);
 
         letter.accepted = true;
         letter.status = false;
 
         letter.save();
-        sender!.save();
-        receiver!.save();
+        sender.save();
+        receiver.save();
 
         const notification: Notification = {
             eventName: EventName.letterAccepted,
             message: "Your made a new friend enjoy!!",
-            receivers: [sender!._id, receiver!._id],
+            receivers: [sender._id, receiver._id],
         };
 
         return {
             status: 200,
             json: {
                 msg:
-                    "Your are now friends with " +
-                    sender?.username +
-                    " enjoy!!",
+                    "Your are now friends with " + sender.username + " enjoy!!",
             },
             notification,
         };

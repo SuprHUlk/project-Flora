@@ -55,7 +55,7 @@ app.post("/accept", authMiddleware, async (req, res, next) => {
     try {
         const data = await accept(req.body, req.body.user);
         res.status(data.status).json(data.json);
-        res.locals.notifcation = data.notification;
+        res.locals.notification = data.notification;
         next();
     } catch (err) {
         res.status(500).json(err);
