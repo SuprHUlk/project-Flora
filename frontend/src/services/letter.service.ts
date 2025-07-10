@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Letter, LetterResponseData } from '../models/letter.model';
 import { environment } from 'src/environments/environment';
-import { map } from 'rxjs';
+import { BehaviorSubject, map, Observable, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -10,7 +10,10 @@ import { map } from 'rxjs';
 export class LetterService {
   private readonly mongoDbBaseApiUrl: string =
     environment.baseApiUrl + '/letter';
-  constructor(private http: HttpClient) {}
+  private letters$ = new BehaviorSubject<Letter[]>([]);
+  constructor(private http: HttpClient) {
+    this.received();
+  }
 
   send(letter: Letter) {
     return this.http.post(this.mongoDbBaseApiUrl + '/send', letter, {
@@ -24,6 +27,10 @@ export class LetterService {
     });
   }
 
+  getLetter$(): Observable<Letter[]> {
+    return this.letters$.asObservable();
+  }
+
   get() {
     return this.http
       .get<LetterResponseData>(this.mongoDbBaseApiUrl + '/get', {
@@ -31,21 +38,26 @@ export class LetterService {
       })
       .pipe(
         map((res: LetterResponseData) => {
+          console.log(res);
           return res.letters;
         })
       );
   }
 
   received() {
-    return this.http
+    this.http
       .get<LetterResponseData>(this.mongoDbBaseApiUrl + '/received', {
         withCredentials: true,
       })
-      .pipe(
-        map((res: LetterResponseData) => {
-          return res.letters;
-        })
-      );
+      .subscribe({
+        next: (res: LetterResponseData) => {
+          this.letters$.next(res.letters);
+        },
+        error: (err) => {
+          console.log(err);
+          this.letters$.error(err);
+        },
+      });
   }
 
   accept(letterRequest: Letter) {

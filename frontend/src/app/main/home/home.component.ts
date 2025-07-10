@@ -29,14 +29,14 @@ export class HomeComponent {
   }
 
   getReceivedLetters() {
-    this.letterService.received().subscribe({
+    this.letterService.getLetter$().subscribe({
       next: (res: Letter[]) => {
         console.log(res);
         this.letters = res;
+        this.loader = false;
       },
       error: (err) => {
         console.log(err);
-
         this.toastService.error({
           message: 'Error: Please refresh the page',
           autohide: true,
@@ -90,7 +90,6 @@ export class HomeComponent {
   onAccept() {
     this.letterService.accept(this.openedLetter!).subscribe({
       next: (res: string) => {
-        alert(res);
         this.toastService.show({
           message: res,
           autohide: true,
