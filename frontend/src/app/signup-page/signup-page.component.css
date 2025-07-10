@@ -1,76 +1,140 @@
 .container-fluid {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 15px;
 }
 
 h1 {
-    font-family: Sofia, Roboto;
-    text-align: center;
-    font-size: 4rem;
-    color: #1C6758;
+  font-family: Sofia, Roboto;
+  text-align: center;
+  font-size: 4rem;
+  color: #1c6758;
 }
 
 form {
-    border-radius: 1%;
-    padding: 2% 3% 2% 3%;
-    background-color: #cfdad2;
+  border-radius: 1%;
+  padding: 2% 3% 2% 3%;
+  background-color: #cfdad2;
+  width: 100%;
+  max-width: 500px;
 }
 
 label {
-    font-size: 1rem;
-    font-family: Roboto;
-    font-weight: 400;
+  font-size: 1rem;
+  font-family: Roboto;
+  font-weight: 400;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .container-fluid {
+    padding: 10px;
+  }
+
+  h1 {
+    font-size: 2.5rem;
+  }
+
+  form {
+    padding: 15px;
+    border-radius: 8px;
+  }
+
+  label {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .container-fluid {
+    padding: 5px;
+  }
+
+  h1 {
+    font-size: 2rem;
+  }
+
+  form {
+    padding: 10px;
+  }
+
+  .css-button-sliding-to-left--green {
+    width: 100%;
+    min-width: unset;
+  }
+}
+
+@media (max-width: 320px) {
+  h1 {
+    font-size: 1.8rem;
+  }
+
+  label {
+    font-size: 0.8rem;
+  }
 }
 
 .css-button-sliding-to-left--green {
-    min-width: 130px;
-    height: 40px;
-    color: #fff;
-    padding: 5px 10px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    position: relative;
-    display: inline-block;
-    outline: none;
-    border-radius: 5px;
-    z-index: 0;
-    background: #fff;
-    overflow: hidden;
-    border: 2px solid #3D8361;
-    color: #3D8361;
+  min-width: 130px;
+  height: 40px;
+  color: #fff;
+  padding: 5px 10px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  display: inline-block;
+  outline: none;
+  border-radius: 5px;
+  z-index: 0;
+  background: #fff;
+  overflow: hidden;
+  border: 2px solid #3d8361;
+  color: #3d8361;
 }
 
 .css-button-sliding-to-left--green:hover {
-    color: #fff;
+  color: #fff;
 }
 
 .css-button-sliding-to-left--green:hover:after {
-    width: 100%;
+  width: 100%;
 }
 
 .css-button-sliding-to-left--green:after {
-    content: "";
-    position: absolute;
-    z-index: -1;
-    transition: all 0.3s ease;
-    right: 0;
-    top: 0;
-    width: 0;
-    height: 100%;
-    background: #3D8361;
+  content: "";
+  position: absolute;
+  z-index: -1;
+  transition: all 0.3s ease;
+  right: 0;
+  top: 0;
+  width: 0;
+  height: 100%;
+  background: #3d8361;
 }
 
-
-input.ng-invalid.ng-touched{
-    border: 1px solid red;
+input.ng-invalid.ng-touched {
+  border: 1px solid red;
 }
 
-.error{
-    font-family: Tilt Neon;
-    font-size: 0.9rem;
-    font-weight: 400;
-    color: red;
+.error {
+  font-family: Tilt Neon;
+  font-size: 0.9rem;
+  font-weight: 400;
+  color: red;
+}
+
+/* Additional responsive styles for inputs */
+@media (max-width: 768px) {
+  .form-control {
+    font-size: 16px; /* Prevents zoom on iOS */
+  }
+}
+
+@media (max-width: 480px) {
+  .error {
+    font-size: 0.8rem;
+  }
 }
