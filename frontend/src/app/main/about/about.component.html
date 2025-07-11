@@ -1,34 +1,37 @@
-<div class="loaderwindow" *ngIf="loader">
-    <img class="load" src="assets\loader.svg" alt="">
-  </div>
-
-
-
-<div class="container-fluid" *ngIf="!loader">
-    <div class="branding mt-4 mb-4">
-        <h1 class="head">About</h1>
-    </div>
-    <div class="container">
-        <div class="pfp">
-            <img src="assets/pfp/pvz.jpeg" alt="" class="dp">
-        </div>
-        <div class="name-info">
-            <div class="name">
-                <p class="u-name">{{username}}</p>
-                <p class="r-name">{{name}}</p>
-                <p class="friend">108 <span class="bold">friends</span></p>
-            </div>
-            <div class="bio">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.  
-            </div>
-            <div class="upload">
-                <label for="inputTag">
-                     Upload
-                    <input id="inputTag" type="file"/>
-                </label>
-            </div>
-        </div>
-    </div>
-    <div class="hr-sect mt-4">Post</div>
-    <div class="post"></div>
+@if(loader) {
+<div class="loaderwindow">
+  <img class="load" src="assets\loader.svg" alt="" />
 </div>
+} @else {
+<div class="container-fluid">
+  <div class="branding mt-4 mb-4">
+    <h1 class="head">About</h1>
+  </div>
+  <div class="container">
+    <div class="pfp">
+      <img src="{{ userData.photoUrl }}" alt="" class="dp" />
+    </div>
+    <div class="name-info">
+      <div class="name">
+        <p class="u-name">{{ userData.username }}</p>
+        <p class="r-name">{{ userData.fname }}</p>
+        <p class="friend">108 <span class="bold">friends</span></p>
+      </div>
+      <div class="bio">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+        commodo consequat.
+      </div>
+      <div class="upload">
+        <label for="inputTag">
+          Upload
+          <input id="inputTag" type="file" />
+        </label>
+      </div>
+    </div>
+  </div>
+  <div class="hr-sect mt-4">Post</div>
+  <div class="post"></div>
+</div>
+}

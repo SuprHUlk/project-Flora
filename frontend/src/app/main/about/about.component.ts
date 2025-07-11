@@ -1,53 +1,25 @@
 import { Component } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { AngularFirestoreCollection } from '@angular/fire/compat/firestore';
-
+import User from 'src/models/user.model';
 
 @Component({
-    selector: 'app-about',
-    templateUrl: './about.component.html',
-    styleUrls: ['./about.component.css'],
-    standalone: false
+  selector: 'app-about',
+  templateUrl: './about.component.html',
+  styleUrls: ['./about.component.css'],
+  standalone: false,
 })
-
-
-
 export class AboutComponent {
-  constructor(public afs: AngularFirestore){};
+  constructor() {}
 
-  loader=false;
-  em=JSON.parse(localStorage.getItem('userData') || '{}').email;
-  name:string;
-  username:string;
-
+  loader = false;
+  userData: User;
   ngOnInit() {
-    this.load();
-    this.afs.doc(`users/${this.em}`).get().subscribe(ref => {
-      // console.log(ref);
-      if(!ref.exists){
-      
-      // console.log("notfound")// //DOC DOES NOT EXIST
-      
-      }else{
-      
-      const doc:any = ref.data();
-      
-      this.name = doc.FIRST_NAME;
-      this.username = "@"+doc.USERNAME;
-      
-      // console.log(this.name) //LOG ENTIRE DOC
-      
-      }
-      
-      });
-
-
-      
-      }
-      load(){
-        this.loader=true;
-        setTimeout(() =>{
-          this.loader=false;
-        },1000)
-      }      
+    // this.load();
+    this.userData = JSON.parse(localStorage.getItem('userData') || '{}');
+  }
+  load() {
+    this.loader = true;
+    setTimeout(() => {
+      this.loader = false;
+    }, 1000);
+  }
 }
