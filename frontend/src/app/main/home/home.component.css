@@ -122,5 +122,9 @@ p {
   overflow-wrap: break-word;
 }
 
-.loader {
+@media (max-width: 600px) {
+  .butdiv {
+    bottom: 25%;
+    left: 50%;
+  }
 }
