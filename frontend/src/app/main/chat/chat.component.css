@@ -11,6 +11,9 @@
   grid-template: 1fr / 1fr 2fr;
   padding: 1rem 2rem 1rem 2rem;
   gap: 1%;
+
+  display: flex;
+  justify-content: center;
 }
 
 .friends-list {
@@ -18,11 +21,13 @@
   flex-direction: column;
   gap: 1%;
   border-right: 1px solid black;
-  min-width: 22vw;
-  max-width: 22vw;
+  /* min-width: 22vw;
+  max-width: 22vw; */
   background-color: #9dc08b;
   border-radius: 15px 0 0 15px;
   padding: 0 2% 0 2%;
+
+  flex: 0.3;
 }
 
 .cover {
@@ -93,8 +98,9 @@ p.last-message {
   flex-direction: column;
   min-height: 91vh;
   max-height: 91vh;
-  min-width: 54vw;
-  max-width: 54vw;
+  /* min-width: 54vw;
+  max-width: 54vw; */
+  flex: 0.7;
 }
 
 .chat-window > .name > h4,
@@ -313,4 +319,34 @@ input {
 .load {
   margin-left: 25%;
   margin-top: 1%;
+}
+
+.show-heading {
+  display: none;
+}
+
+@media (max-width: 600px) {
+  .show-heading {
+    display: block;
+  }
+  .container-fluid {
+    flex-direction: column;
+  }
+  .friends-list {
+    flex: 1;
+  }
+  .disable {
+    display: none;
+  }
+  .chat-window {
+    /* min-height: 50vh;
+    max-height: 60vh; */
+    height: 100vh;
+    border-radius: 0 0 15px 15px;
+  }
+  .scroller {
+    min-height: 50vh;
+    max-height: 65vh;
+    height: 80vh;
+  }
 }

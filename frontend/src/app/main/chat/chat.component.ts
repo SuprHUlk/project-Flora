@@ -29,7 +29,7 @@ export class ChatComponent {
   friends: Friend[] = [];
 
   loader: boolean = true;
-
+  disable: boolean = true;
   chat: ChatResponse[] = [];
 
   ngOnInit() {
@@ -79,6 +79,12 @@ export class ChatComponent {
     this.showTextField = true;
     this.chatService.get(friend._id);
     this.currentUser = friend;
+
+    this.toggleDisable();
+  }
+
+  toggleDisable() {
+    this.disable = !this.disable;
   }
 
   send() {

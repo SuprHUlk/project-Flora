@@ -4,7 +4,7 @@
 </div>
 } @else {
 <div class="container-fluid">
-  <div class="friends-list">
+  <div class="friends-list" [class.disable]="!disable">
     <div class="heading">Chats</div>
     <div class="cover">
       <p class="error-message">Send a letter to new make friends</p>
@@ -29,7 +29,7 @@
     </div>
   </div>
 
-  <div class="chat-window">
+  <div class="chat-window" [class.disable]="disable">
     @if(!showTextField) {
     <div class="show-instruction">
       <h4 class="instruction">
@@ -42,6 +42,7 @@
       </h4>
     </div>
     } @else {
+    <div class="heading show-heading" (click)="toggleDisable()"><- Chats</div>
     <div class="user-info">
       <div
         class="propic"
