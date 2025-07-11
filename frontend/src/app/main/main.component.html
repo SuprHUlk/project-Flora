@@ -122,4 +122,53 @@
     <app-chat *ngSwitchCase="'chat'"></app-chat>
     <app-home *ngSwitchCase="'Home'"></app-home>
   </div>
+
+  <!-- Bottom navigation bar for mobile -->
+  <nav class="bottom-nav">
+    <button
+      type="button"
+      (click)="userType = 'Home'"
+      [class.active]="userType === 'Home'"
+    >
+      <i class="fa-solid fa-house"></i>
+    </button>
+    <button
+      type="button"
+      (click)="userType = 'chat'"
+      [class.active]="userType === 'chat'"
+    >
+      <i class="fa-solid fa-user-group"></i>
+    </button>
+    <button
+      type="button"
+      (click)="userType = 'letter'"
+      [class.active]="userType === 'letter'"
+    >
+      <i class="fa-solid fa-envelope"></i>
+    </button>
+    <button
+      type="button"
+      (click)="userType = 'my-letters'"
+      [class.active]="userType === 'my-letters'"
+    >
+      <i class="fa-solid fa-list"></i>
+    </button>
+    <button
+      type="button"
+      (click)="userType = 'settings'"
+      [class.active]="userType === 'settings'"
+    >
+      <i class="fa-solid fa-gears"></i>
+    </button>
+    <button
+      type="button"
+      (click)="userType = 'about'"
+      [class.active]="userType === 'about'"
+    >
+      <i class="fa-solid fa-address-card"></i>
+    </button>
+    <button type="button" (click)="onLogOut()">
+      <i class="fa-solid fa-person-walking-arrow-right"></i>
+    </button>
+  </nav>
 </div>
