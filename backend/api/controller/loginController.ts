@@ -7,6 +7,7 @@ import { Response as ExpressResponse } from "express";
 import { getFirebase } from "../../database/firebase";
 
 import bcrypt from "bcryptjs";
+import logger from "../../config/logger";
 
 const SECRET_KEY: string = process.env.SECRET_KEY!;
 const TOKEN_EXPIRATION_TIME: number = parseInt(
@@ -112,8 +113,14 @@ async function google(
                 (await User.findOne({ email: userBody.email })) ??
                 (await User.findOne({ username: userBody.username }));
 
-            userBody = userMongoDb!;
+            if (!userMongoDb) {
+                userBody.password = hashedPass;
+                userBody = await addUser(userBody);
+            } else {
+                userBody = userMongoDb;
+            }
         } catch (err) {
+            logger.error(err);
             userBody.password = hashedPass;
             userBody = await addUser(userBody);
         } finally {

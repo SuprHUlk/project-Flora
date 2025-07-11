@@ -13,6 +13,6 @@ export class AppComponent {
   title = 'project-flora';
 
   ngOnInit() {
-    // this.loginService.autoLogin();
+    this.loginService.autoLogin();
   }
 }
