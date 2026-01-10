@@ -7,7 +7,7 @@ export const environment = {
     messagingSenderId: '216549739585',
     appId: '1:216549739585:web:e9c28646e474637e3d4ac0',
   },
-  baseApiUrl: 'https://chat-flora-467840372881.asia-south1.run.app',
+  baseApiUrl: 'https://flora-backend.azurewebsites.net',
   showLogs: false,
-  socketBaseUrl: 'wss://chat-flora-467840372881.asia-south1.run.app',
+  socketBaseUrl: 'wss://flora-backend.azurewebsites.net',
 };
