@@ -10,7 +10,9 @@ app.get("/get/:id", authMiddleware, async (req, res) => {
         if (!id) {
             res.status(400).json({ error: "Missing id parameter" });
         }
-        const data = await get(id, req.body.user);
+
+        const idString = Array.isArray(id) ? id[0] : id;
+        const data = await get(idString, req.body.user);
         res.status(data.status).json(data.json);
     } catch (err) {
         res.status(500).json(err);
