@@ -6,10 +6,12 @@ const FIREBASE_STORAGE_URL = process.env.FIREBASE_STORAGE_URL!;
 
 let firebaseApp: admin.app.App;
 
+const serviceAccount = JSON.parse(FIREBASE_CONFIG_PATH);
+
 function connectFirebase() {
     try {
         firebaseApp = admin.initializeApp({
-            credential: admin.credential.cert(FIREBASE_CONFIG_PATH),
+            credential: admin.credential.cert(serviceAccount),
             storageBucket: FIREBASE_STORAGE_URL,
         });
         logger.info("Firebase Connected");
