@@ -26,13 +26,15 @@ const initSocket = (server: HttpSever) => {
     });
 
     io.on("connection", async (socket) => {
-        await getRedis().set("_id:" + socket.user._id, "sid:" + socket.id);
+        await (
+            await getRedis()
+        ).set("_id:" + socket.user._id, "sid:" + socket.id);
 
         //register events
         chatEvent(io, socket, notificationMiddlewareSocket);
 
-        socket.on("disconnect", () => {
-            getRedis().del("_id:" + socket.user._id);
+        socket.on("disconnect", async () => {
+            (await getRedis()).del("_id:" + socket.user._id).catch(() => {});
         });
     });
 

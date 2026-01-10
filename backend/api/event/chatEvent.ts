@@ -20,9 +20,9 @@ async function send(
     try {
         logger.info("Chat Event send");
         sendController(chat, socket.user);
-        let receiverSid: string | null = await getRedis().get(
-            "_id:" + chat.receiver
-        );
+        let receiverSid: string | null = await (
+            await getRedis()
+        ).get("_id:" + chat.receiver);
         if (receiverSid) {
             logger.info("Sid: " + receiverSid);
             receiverSid = receiverSid.split(":")[1];

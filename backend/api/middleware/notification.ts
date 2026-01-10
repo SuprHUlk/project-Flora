@@ -30,7 +30,9 @@ async function notificationMiddleware(
 
         notification.receivers.forEach(async (receiver: string) => {
             //check user is online
-            let sid: string | null = await getRedis().get("_id:" + receiver);
+            let sid: string | null = await (
+                await getRedis()
+            ).get("_id:" + receiver);
 
             if (sid) {
                 sid = sid.split(":")[1];
@@ -62,7 +64,9 @@ export function notificationMiddlewareSocket(notification: Notification) {
 
         notification.receivers.forEach(async (receiver: string) => {
             //check user is online
-            let sid: string | null = await getRedis().get("_id:" + receiver);
+            let sid: string | null = await (
+                await getRedis()
+            ).get("_id:" + receiver);
 
             if (sid) {
                 sid = sid.split(":")[1];
