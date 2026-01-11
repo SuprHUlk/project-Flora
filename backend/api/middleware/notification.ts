@@ -25,7 +25,7 @@ async function notificationMiddleware(
         logger.info(notification);
 
         if (!notification) {
-            next();
+            return next();
         }
 
         notification.receivers.forEach(async (receiver: string) => {
@@ -50,6 +50,7 @@ async function notificationMiddleware(
     } catch (err) {
         logger.error("Error in notification middleware");
         logger.error(err);
+        console.log(err);
     }
 }
 
