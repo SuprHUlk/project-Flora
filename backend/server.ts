@@ -6,7 +6,7 @@ import bodyParser from "body-parser";
 import { createServer } from "node:http";
 
 import connectMongoDB from "./database/mongoDb";
-import { connectRedis } from "./database/redis";
+import Redis from "./database/redis";
 import { connectFirebase } from "./database/firebase";
 import { initSocket } from "./handler/socket";
 
@@ -58,7 +58,7 @@ const server = createServer(app);
 
 connectMongoDB();
 connectFirebase();
-connectRedis();
+Redis.getInstance();
 initSocket(server);
 
 server.listen(PORT, () => {

@@ -1,7 +1,7 @@
 import { Server } from "socket.io";
 import { Server as HttpSever } from "node:http";
 import { authMiddlewareSocket } from "../api/middleware/auth";
-import { getRedis } from "../database/redis";
+import Redis from "../database/redis";
 import chatEvent from "../api/event/chatEvent";
 import { notificationMiddlewareSocket } from "../api/middleware/notification";
 
@@ -27,14 +27,16 @@ const initSocket = (server: HttpSever) => {
 
     io.on("connection", async (socket) => {
         await (
-            await getRedis()
+            await Redis.getInstance()
         ).set("_id:" + socket.user._id, "sid:" + socket.id);
 
         //register events
         chatEvent(io, socket, notificationMiddlewareSocket);
 
         socket.on("disconnect", async () => {
-            (await getRedis()).del("_id:" + socket.user._id).catch(() => {});
+            (await Redis.getInstance())
+                .del("_id:" + socket.user._id)
+                .catch(() => {});
         });
     });
 

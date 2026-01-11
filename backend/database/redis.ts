@@ -7,13 +7,38 @@ const UPSTASH_REDIS_CONNECTION_STRING =
     process.env.UPSTASH_REDIS_CONNECTION_STRING;
 const UPSTASH_REDIS_REST_TOKEN = process.env.UPSTASH_REDIS_REST_TOKEN;
 
-let redis: Redis;
-
 class Redis {
-    redisClient: RedisClientType;
+    private static _instance: Redis;
+    private redisClient: RedisClientType;
 
-    constructor(redisClient: RedisClientType) {
+    private constructor(redisClient: RedisClientType) {
         this.redisClient = redisClient;
+    }
+
+    static async getInstance(): Promise<Redis> {
+        if (!Redis._instance) {
+            await Redis.connectRedis();
+        }
+        return Redis._instance;
+    }
+
+    private static async connectRedis() {
+        try {
+            if (Redis._instance) {
+                return;
+            }
+            const redisClient: RedisClientType = createClient({
+                url: UPSTASH_REDIS_CONNECTION_STRING,
+                password: UPSTASH_REDIS_REST_TOKEN,
+            });
+
+            await redisClient.connect();
+            Redis._instance = new Redis(redisClient);
+            logger.info("Redis Connected");
+        } catch (err) {
+            logger.error("Cannot connect to redis: ", { error: err });
+            throw err;
+        }
     }
 
     async set(key: string, value: string) {
@@ -29,27 +54,4 @@ class Redis {
     }
 }
 
-function connectRedis() {
-    try {
-        if (redis) {
-            return;
-        }
-        let redisClient: RedisClientType = createClient({
-            url: UPSTASH_REDIS_CONNECTION_STRING,
-            password: UPSTASH_REDIS_REST_TOKEN,
-        });
-
-        redis = new Redis(redisClient);
-    } catch (err) {
-        logger.error("Cannot connect to redis: ", { error: err });
-    }
-}
-
-async function getRedis() {
-    if (!redis) {
-        connectRedis();
-    }
-    return redis;
-}
-
-export { connectRedis, getRedis };
+export default Redis;

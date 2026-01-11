@@ -1,7 +1,7 @@
 import { Server, Socket } from "socket.io";
 import { send as sendController } from "../controller/chatController";
 import { IChatRequest, IChatResponse } from "../../model/chatModel";
-import { getRedis } from "../../database/redis";
+import Redis from "../../database/redis";
 import logger from "../../config/logger";
 import { EventName, Notification } from "../../model/notificationModel";
 
@@ -21,7 +21,7 @@ async function send(
         logger.info("Chat Event send");
         sendController(chat, socket.user);
         let receiverSid: string | null = await (
-            await getRedis()
+            await Redis.getInstance()
         ).get("_id:" + chat.receiver);
         if (receiverSid) {
             logger.info("Sid: " + receiverSid);

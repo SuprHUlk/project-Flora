@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import logger from "../../config/logger";
 import { getIO } from "../../handler/socket";
-import { getRedis } from "../../database/redis";
+import Redis from "../../database/redis";
 import {
     Notification,
     getEventNameString,
@@ -31,7 +31,7 @@ async function notificationMiddleware(
         notification.receivers.forEach(async (receiver: string) => {
             //check user is online
             let sid: string | null = await (
-                await getRedis()
+                await Redis.getInstance()
             ).get("_id:" + receiver);
 
             if (sid) {
@@ -65,7 +65,7 @@ export function notificationMiddlewareSocket(notification: Notification) {
         notification.receivers.forEach(async (receiver: string) => {
             //check user is online
             let sid: string | null = await (
-                await getRedis()
+                await Redis.getInstance()
             ).get("_id:" + receiver);
 
             if (sid) {
