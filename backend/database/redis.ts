@@ -32,6 +32,9 @@ class Redis {
                 password: UPSTASH_REDIS_REST_TOKEN,
             });
 
+            console.log("String", UPSTASH_REDIS_CONNECTION_STRING);
+            console.log("token", UPSTASH_REDIS_REST_TOKEN);
+
             await redisClient.connect();
             Redis._instance = new Redis(redisClient);
             logger.info("Redis Connected");
